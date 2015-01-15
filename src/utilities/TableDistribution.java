@@ -53,6 +53,10 @@ public class TableDistribution {
                 int amountOfTables = (int)maxValueWithoutDecimals + 1;
                 fillTable(amountOfTables);
             }
+            else{
+                int amountOfTables = (int)maxValueWithoutDecimals;
+                fillTable(amountOfTables);
+            }
         }
         
         else if (players.size() == minPlayersPerTournament){
