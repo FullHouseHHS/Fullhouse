@@ -5,7 +5,7 @@
  */
 package model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,9 +13,9 @@ import java.util.List;
  */
 public class Table {
     private int tableNumber;
-    List<Player> playerList;
+    ArrayList<Player> playerList;
     
-    public Table(int tableNumber, List<Player> playerList){
+    public Table(int tableNumber, ArrayList<Player> playerList){
         this.tableNumber = tableNumber;
         this.playerList = playerList;
     }
@@ -28,11 +28,11 @@ public class Table {
         this.tableNumber = tableNumber;
     }
 
-    public List<Player> getPlayerList() {
+    public ArrayList<Player> getPlayerList() {
         return playerList;
     }
 
-    public void setPlayerList(List<Player> playerList) {
+    public void setPlayerList(ArrayList<Player> playerList) {
         this.playerList = playerList;
     }
     

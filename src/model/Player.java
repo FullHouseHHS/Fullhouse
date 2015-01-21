@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 /**
@@ -17,9 +12,9 @@ public class Player {
     
     private int id;
     private int telephoneNumber;
-    private int rating; // kan het een komma getal worden?
+    private double rating;
     
-    public Player(int id, String name, String zipCode, String city, int telephoneNumber,String emailAdress, int rating) {
+    public Player(int id, String name, String zipCode, String city, int telephoneNumber,String emailAdress, double rating) {
         this.id = id;
         this.name = name;
         this.zipCode = zipCode;
@@ -73,11 +68,16 @@ public class Player {
         this.telephoneNumber = telephoneNumber;
     }
     
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+    
+    @Override
+    public String toString(){
+        return "" + name + "   " + zipCode + "   " + city + "   " + telephoneNumber + "   " + emailAdress + "   " + rating  ;    
     }
 }
