@@ -12,11 +12,31 @@ package model;
 public class Location {
     
     private String adress;
+    private String location;
+    private int capacity;
     private int maxTabels;
     
-    public Location(String adress, int maxTables) {
+    public Location(String adress, String location, int capacity, int maxTables) {
         this.adress = adress;
+        this.location = location;
+        this.capacity = capacity;
         this.maxTabels = maxTables;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
     
     public String getAdress() {

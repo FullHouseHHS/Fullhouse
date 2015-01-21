@@ -5,7 +5,7 @@
  */
 package controller;
 
-import databaseUtil.DataBaseConnector;
+import utilities.databaseUtil.DataBaseConnector;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,21 +21,20 @@ import model.Player;
 public class PlayerController {
     private static ArrayList<Player> players;
     
-    public static void addPlayer(String name,String zipCode,String city,int telephoneNumber,String emailAdress,double rating){
+    public static void addPlayer(String name,int telephoneNumber,String emailAdress,double rating, boolean is_famous){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
-            String prepStatInsertKlant = "INSERT INTO player (name, zipCode, city, telephoneNumber, emailAdress, rating) "
-                                                   + "VALUES (?, ?, ?, ?, ?, ?)";
+            String prepStatInsertKlant = "INSERT INTO player (name, telephoneNumber, emailAdress, rating, is_famous) "
+                                                   + "VALUES (?, ?, ?, ?, ?)";
             PreparedStatement prepStat =  conn.prepareStatement(prepStatInsertKlant);
             
             prepStat.setString(1, name);
-            prepStat.setString(2, zipCode);
-            prepStat.setString(3, city);
-            prepStat.setInt(4, telephoneNumber);
-            prepStat.setString(5, emailAdress);
-            prepStat.setDouble(6, rating);
+            prepStat.setInt(2, telephoneNumber);
+            prepStat.setString(3, emailAdress);
+            prepStat.setDouble(4, rating);
+            prepStat.setBoolean(5, is_famous);
             
             System.out.println(prepStat);
             prepStat.executeUpdate();
@@ -47,22 +46,21 @@ public class PlayerController {
         }
     }
     
-    public static void updatePlayer(String name,String zipCode,String city,int telephoneNumber,String emailAdress,double rating, Player player){
+    public static void updatePlayer(String name, int telephoneNumber, String emailAdress, double rating, boolean is_famous, Player player){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
-            String prepStatChangeKlant = "UPDATE player SET name=?, zipCode=?, city=?, telephoneNumber=?, emailAdress=?, rating=? WHERE id = ?";
+            String prepStatChangeKlant = "UPDATE player SET name=?, telephoneNumber=?, emailAdress=?, rating=?, is_famous WHERE id = ?";
             
             PreparedStatement prepStat =  conn.prepareStatement(prepStatChangeKlant);
             
             prepStat.setString(1, name);
-            prepStat.setString(2, zipCode);
-            prepStat.setString(3, city);
-            prepStat.setInt(4, telephoneNumber);
-            prepStat.setString(5, emailAdress);
-            prepStat.setDouble(6, rating);
-            prepStat.setInt(7, player.getId());
+            prepStat.setInt(2, telephoneNumber);
+            prepStat.setString(3, emailAdress);
+            prepStat.setDouble(4, rating);
+            prepStat.setInt(5, player.getId());
+            prepStat.setBoolean(6, is_famous);
             
             System.out.println(prepStat);
             prepStat.executeUpdate();
@@ -101,13 +99,12 @@ public class PlayerController {
             while (result.next()) {
                 int id = result.getInt("id");
                 String name = result.getString("name");
-                String zipCode = result.getString("zipCode");
-                String city = result.getString("city");
                 int telephoneNumber = result.getInt("telephoneNumber");
                 String emailAdress = result.getString("emailAdress");
                 double rating = result.getInt("rating");
+                boolean is_famous = result.getBoolean("is_famous");
                 
-                Player player = new Player(id, name, zipCode, city, telephoneNumber, emailAdress, rating);
+                Player player = new Player(id, name, telephoneNumber, emailAdress, rating, is_famous);
                 players.add(player);
             }
 

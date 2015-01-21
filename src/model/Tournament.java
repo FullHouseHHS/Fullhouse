@@ -16,14 +16,23 @@ public class Tournament {
     Player firstPlace;
     Player secondPlace;
     Player thirdPlace;
+    TournamentType tournamentType;
     ArrayList<Player> playerList;
-    
-    public Tournament(int tournamentId, Player firstPlace, Player secondPlace, Player thirdPlace, ArrayList<Player> playerList) {
+
+    public Tournament(int tournamentId, Player firstPlace, Player secondPlace, Player thirdPlace, TournamentType tournamentType, ArrayList<Player> playerList) {
         this.tournamentId = tournamentId;
         this.firstPlace = firstPlace;
         this.secondPlace = secondPlace;
         this.thirdPlace = thirdPlace;
         this.playerList = playerList;
+    }
+
+    public TournamentType getTournamentType() {
+        return tournamentType;
+    }
+
+    public void setTournamentType(TournamentType tournamentType) {
+        this.tournamentType = tournamentType;
     }
 
     public int getTournamentId() {
