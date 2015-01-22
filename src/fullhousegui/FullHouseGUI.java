@@ -3,20 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package fullhousegui;
+
+import add.AddObjects;
+import add.AddPlayer;
+import overview.Overview;
+import overview.PlayerOverview;
 
 /**
  *
- * @author CVD
+ * @author nikko
  */
-public class FullHouse extends javax.swing.JFrame {
+public class FullHouseGUI extends javax.swing.JFrame {
 
     /**
-     * Creates new form NewJFrame
+     * Creates new form FullHouseGUI
      */
-    public FullHouse() {
+    
+    public FullHouseGUI() {
         initComponents();
-        addTabs();
+        initTabs();
     }
 
     /**
@@ -31,7 +37,6 @@ public class FullHouse extends javax.swing.JFrame {
         jTabbedPane = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -39,14 +44,14 @@ public class FullHouse extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 780, Short.MAX_VALUE)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 925, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 578, Short.MAX_VALUE)
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -70,21 +75,20 @@ public class FullHouse extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FullHouse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FullHouseGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FullHouse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FullHouseGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FullHouse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FullHouseGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FullHouse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FullHouseGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FullHouse().setVisible(true);
+                new FullHouseGUI().setVisible(true);
             }
         });
     }
@@ -93,13 +97,10 @@ public class FullHouse extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane;
     // End of variables declaration//GEN-END:variables
 
-    private void addTabs() {
-        this.jTabbedPane.add("Home page", new Home());
-        this.jTabbedPane.add("Gebruiker", new User());
-        this.jTabbedPane.add("Administrator", new Admin());
-    }
-    
-    public void setTab(String tabName) {
-        this.jTabbedPane.setSelectedIndex(jTabbedPane.indexOfTab(tabName));
+    private void initTabs() {
+        this.jTabbedPane.add("Home", new HomeScreen());
+        this.jTabbedPane.add("Overzichten", new Overview());
+        this.jTabbedPane.add("Toevoegen", new AddObjects());
+        this.jTabbedPane.add("Speler toevoegen", new AddPlayer());
     }
 }
