@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package overview;
 
 /**
  *
- * @author Nick
+ * @author nikko
  */
-public class User extends javax.swing.JPanel {
+public class Overview extends javax.swing.JPanel {
 
     /**
-     * Creates new form Admin
+     * Creates new form Overview
      */
-    public User() {
+    public Overview() {
         initComponents();
+        initTabs();
     }
 
     /**
@@ -27,19 +28,34 @@ public class User extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane = new javax.swing.JTabbedPane();
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 780, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 896, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 578, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane jTabbedPane;
     // End of variables declaration//GEN-END:variables
+
+    private void initTabs() {
+        this.jTabbedPane.add("Speler overzicht", new PlayerOverview());
+        this.jTabbedPane.add("Toernooi overzicht", new TournamentOverview());
+        this.jTabbedPane.add("Betalingen van spelers", new FuturePlayerOverview());
+    }
 }
