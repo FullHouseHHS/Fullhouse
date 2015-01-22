@@ -73,6 +73,10 @@ DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
 
         jScrollPane1 = new javax.swing.JScrollPane();
         TPlayer = new javax.swing.JTable();
+        btPickLoser = new javax.swing.JButton();
+        btPickWinner = new javax.swing.JButton();
+        btSetLoser = new javax.swing.JButton();
+        btSetWinner = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,24 +101,105 @@ DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
         });
         jScrollPane1.setViewportView(TPlayer);
 
+        btPickLoser.setText("pick loser");
+        btPickLoser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPickLoserActionPerformed(evt);
+            }
+        });
+
+        btPickWinner.setText("pick winner");
+        btPickWinner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPickWinnerActionPerformed(evt);
+            }
+        });
+
+        btSetLoser.setText("set loser score");
+        btSetLoser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSetLoserActionPerformed(evt);
+            }
+        });
+
+        btSetWinner.setText("set winner score");
+        btSetWinner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSetWinnerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(btPickLoser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btPickWinner)
+                        .addGap(18, 18, 18)
+                        .addComponent(btSetLoser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btSetWinner))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btPickLoser)
+                    .addComponent(btPickWinner)
+                    .addComponent(btSetLoser)
+                    .addComponent(btSetWinner))
+                .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btPickLoserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPickLoserActionPerformed
+        selectedIndexL = this.TPlayer.getSelectedRow(); 
+        Player player = this.players.get(selectedIndexL);
+        sl = player.getRating();
+    }//GEN-LAST:event_btPickLoserActionPerformed
+
+    private void btPickWinnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPickWinnerActionPerformed
+        selectedIndexW = this.TPlayer.getSelectedRow(); 
+        Player player = this.players.get(selectedIndexW);
+        sw = player.getRating();
+    }//GEN-LAST:event_btPickWinnerActionPerformed
+
+    private void btSetLoserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSetLoserActionPerformed
+        if(sw > sl) {
+            sc = (sw - sl)/4 + 1;
+            scw = scw + (sw - sl)/4 + 1;
+        }
+        
+        if(sw < sl) {
+            sc = (sl - sw)/8 + 1;
+            scw = scw + (sl - sw)/8 + 1;
+        }
+        
+        if(sw == sl) {
+            sc = 1.17;
+            scw = scw + 1.17;
+        }
+        calculateLoser();
+    }//GEN-LAST:event_btSetLoserActionPerformed
+
+    private void btSetWinnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSetWinnerActionPerformed
+        calculateWinner();
+        scw = 0;
+    }//GEN-LAST:event_btSetWinnerActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -150,6 +235,10 @@ DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TPlayer;
+    private javax.swing.JButton btPickLoser;
+    private javax.swing.JButton btPickWinner;
+    private javax.swing.JButton btSetLoser;
+    private javax.swing.JButton btSetWinner;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
