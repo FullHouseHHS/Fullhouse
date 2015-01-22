@@ -5,6 +5,8 @@
  */
 package add;
 
+import java.awt.Color;
+
 /**
  *
  * @author nikko
@@ -32,7 +34,7 @@ public class AddObjects extends javax.swing.JPanel {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanelMasterclass = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jMasterclassLocation = new javax.swing.JTextField();
+        jMasterclassLocationLetters = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jMasterclassPlayers = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
@@ -42,10 +44,10 @@ public class AddObjects extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         jMasterclassMinPoints = new javax.swing.JTextField();
         jMasterclassInvalidInput = new javax.swing.JLabel();
+        jMasterclassLocationNumbers = new javax.swing.JTextField();
         jPanelTournament = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jTournamentLocation = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jTournamentMaxParticipants = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
@@ -56,6 +58,8 @@ public class AddObjects extends javax.swing.JPanel {
         jRadioHearts = new javax.swing.JRadioButton();
         jTournamentButton = new javax.swing.JButton();
         jTournamentInvalidInput = new javax.swing.JLabel();
+        jTournamentLocationNumbers = new javax.swing.JTextField();
+        jTournamentLocationLetters = new javax.swing.JTextField();
 
         jPanelMasterclass.setBackground(new java.awt.Color(220, 240, 240));
 
@@ -78,6 +82,11 @@ public class AddObjects extends javax.swing.JPanel {
         });
 
         jMasterclassButton.setText("Voeg toe");
+        jMasterclassButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMasterclassButtonMouseClicked(evt);
+            }
+        });
 
         jLabel18.setText("Minimaal aantal punten");
 
@@ -100,9 +109,12 @@ public class AddObjects extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanelMasterclassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jMasterclassMinPoints)
-                            .addComponent(jMasterclassPlayers, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jMasterclassLocation, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(jMasterclassMaxParticipants)))
+                            .addComponent(jMasterclassPlayers, javax.swing.GroupLayout.Alignment.TRAILING, 0, 210, Short.MAX_VALUE)
+                            .addComponent(jMasterclassMaxParticipants)
+                            .addGroup(jPanelMasterclassLayout.createSequentialGroup()
+                                .addComponent(jMasterclassLocationLetters, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jMasterclassLocationNumbers, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMasterclassLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanelMasterclassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,8 +129,9 @@ public class AddObjects extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMasterclassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jMasterclassLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
+                    .addComponent(jMasterclassLocationLetters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(jMasterclassLocationNumbers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMasterclassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jMasterclassPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,7 +144,7 @@ public class AddObjects extends javax.swing.JPanel {
                 .addGroup(jPanelMasterclassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(jMasterclassMinPoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 314, Short.MAX_VALUE)
                 .addComponent(jMasterclassInvalidInput)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jMasterclassButton)
@@ -162,6 +175,11 @@ public class AddObjects extends javax.swing.JPanel {
         jRadioHearts.setText("Hartenjagen");
 
         jTournamentButton.setText("Voeg toe");
+        jTournamentButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTournamentButtonMouseClicked(evt);
+            }
+        });
 
         jTournamentInvalidInput.setText("jLabel3");
 
@@ -182,13 +200,17 @@ public class AddObjects extends javax.swing.JPanel {
                             .addComponent(jLabel16)
                             .addComponent(jLabel17))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanelTournamentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTournamentLocation)
-                            .addComponent(jTournamentMaxParticipants)
-                            .addComponent(jTournamentTables)
-                            .addComponent(jRadioBridge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioPoker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jRadioHearts, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)))
+                        .addGroup(jPanelTournamentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTournamentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTournamentMaxParticipants)
+                                .addComponent(jTournamentTables)
+                                .addComponent(jRadioBridge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jRadioPoker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jRadioHearts, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTournamentLayout.createSequentialGroup()
+                                .addComponent(jTournamentLocationLetters, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTournamentLocationNumbers, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTournamentLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanelTournamentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +226,9 @@ public class AddObjects extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanelTournamentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTournamentLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelTournamentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTournamentLocationLetters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTournamentLocationNumbers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelTournamentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
@@ -253,6 +277,14 @@ public class AddObjects extends javax.swing.JPanel {
     private void jMasterclassMaxParticipantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMasterclassMaxParticipantsActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMasterclassMaxParticipantsActionPerformed
+
+    private void jMasterclassButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMasterclassButtonMouseClicked
+        checkMasterclassInput();
+    }//GEN-LAST:event_jMasterclassButtonMouseClicked
+
+    private void jTournamentButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTournamentButtonMouseClicked
+        checkTournamentInput();
+    }//GEN-LAST:event_jTournamentButtonMouseClicked
     
     
 
@@ -271,7 +303,8 @@ public class AddObjects extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton jMasterclassButton;
     private javax.swing.JLabel jMasterclassInvalidInput;
-    private javax.swing.JTextField jMasterclassLocation;
+    private javax.swing.JTextField jMasterclassLocationLetters;
+    private javax.swing.JTextField jMasterclassLocationNumbers;
     private javax.swing.JTextField jMasterclassMaxParticipants;
     private javax.swing.JTextField jMasterclassMinPoints;
     private javax.swing.JComboBox jMasterclassPlayers;
@@ -282,8 +315,76 @@ public class AddObjects extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioPoker;
     private javax.swing.JButton jTournamentButton;
     private javax.swing.JLabel jTournamentInvalidInput;
-    private javax.swing.JTextField jTournamentLocation;
+    private javax.swing.JTextField jTournamentLocationLetters;
+    private javax.swing.JTextField jTournamentLocationNumbers;
     private javax.swing.JTextField jTournamentMaxParticipants;
     private javax.swing.JTextField jTournamentTables;
     // End of variables declaration//GEN-END:variables
+
+    private void checkTournamentInput() {
+        boolean tournamentIncorrect = false;
+        
+        tournamentIncorrect = InputVerifier.checkLetters(this.jTournamentLocationLetters.getText()) ? tournamentIncorrect : true;
+        tournamentIncorrect = InputVerifier.checkNumbers(this.jTournamentLocationNumbers.getText()) ? tournamentIncorrect : true;
+        
+        tournamentIncorrect = InputVerifier.checkNumbers(this.jTournamentMaxParticipants.getText()) ? tournamentIncorrect : true;
+        
+        tournamentIncorrect = InputVerifier.checkNumbers(this.jTournamentTables.getText()) ? tournamentIncorrect : true;
+        
+        
+        if (!tournamentIncorrect){
+            //Add to database
+            jTournamentInvalidInput.setVisible(true);
+            jTournamentInvalidInput.setForeground(new Color(0, 200, 0));
+            jTournamentInvalidInput.setText("Toegevoegd aan de database!");
+            clearTournamentFields();
+        } else {
+            jTournamentInvalidInput.setVisible(true);
+            jTournamentInvalidInput.setForeground(Color.red);
+            jTournamentInvalidInput.setText("Bepaalde velden hebben geen correcte input.");
+        }
+    }
+
+    private void checkMasterclassInput() {
+        boolean masterclassIncorrect = false;
+        
+        masterclassIncorrect = InputVerifier.checkLetters(this.jMasterclassLocationLetters.getText()) ? masterclassIncorrect : true;
+        masterclassIncorrect = InputVerifier.checkNumbers(this.jMasterclassLocationNumbers.getText()) ? masterclassIncorrect : true;
+        
+        masterclassIncorrect = InputVerifier.checkNumbers(this.jMasterclassMaxParticipants.getText()) ? masterclassIncorrect : true;
+        
+        masterclassIncorrect = InputVerifier.checkNumbers(this.jMasterclassMinPoints.getText()) ? masterclassIncorrect : true;
+        
+        
+        if (!masterclassIncorrect){
+            //Add to database
+            jMasterclassInvalidInput.setVisible(true);
+            jMasterclassInvalidInput.setForeground(new Color(0, 200, 0));
+            jMasterclassInvalidInput.setText("Toegevoegd aan de database!");
+            clearMasterclassFields();
+        } else {
+            jMasterclassInvalidInput.setVisible(true);
+            jMasterclassInvalidInput.setForeground(Color.red);
+            jMasterclassInvalidInput.setText("Bepaalde velden hebben geen correcte input.");
+        }
+    }
+    
+    private void clearTournamentFields() {
+        this.jTournamentLocationLetters.setText("");
+        this.jTournamentLocationNumbers.setText("");
+        this.jTournamentMaxParticipants.setText("");
+        this.jTournamentTables.setText("");
+    }
+    
+    private void clearMasterclassFields() {
+        this.jMasterclassLocationLetters.setText("");
+        this.jMasterclassLocationNumbers.setText("");
+        this.jMasterclassMaxParticipants.setText("");
+        this.jMasterclassMinPoints.setText("");
+    }
+
+
+
+
+
 }
