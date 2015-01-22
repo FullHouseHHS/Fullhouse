@@ -65,7 +65,7 @@ public class Player {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
     /*
@@ -73,4 +73,8 @@ public class Player {
     public String toString(){
         return "" + name + "   " +  playerAdress.getCity() + "   " + playerAdress.getAdress() + "   " + playerAdress.getZipCode() + "   " + telephoneNumber + "   " + emailAdress + "   " + rating  ;    
     }*/
+    
+    public String[] getInfo() {
+        return new String[]{"" + id, "" + rating};
+    }
 }
