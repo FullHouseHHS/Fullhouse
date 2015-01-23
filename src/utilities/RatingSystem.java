@@ -181,13 +181,13 @@ DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
 
     private void btSetLoserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSetLoserActionPerformed
         if(sw > sl) {
-            sc = (sw - sl)/4 + 1;
-            scw = scw + (sw - sl)/4 + 1;
+            sc = (sw - sl)/4 + 25;
+            scw = scw + (sw - sl)/4 + 25;
         }
         
         if(sw < sl) {
-            sc = (sl - sw)/8 + 1;
-            scw = scw + (sl - sw)/8 + 1;
+            sc = (sl - sw)/8 + 25;
+            scw = scw + (sl - sw)/8 + 25;
         }
         
         if(sw == sl) {
