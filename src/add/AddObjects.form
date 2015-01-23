@@ -83,6 +83,19 @@
                               <Component id="jMasterclassInvalidInput" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jMasterclassDate1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="jMasterclassYear" min="-2" pref="75" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Component id="jLabel5" min="-2" pref="4" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                          <Component id="jMasterclassMonth" min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jLabel6" min="-2" pref="4" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jMasterclassDay" min="-2" pref="50" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -114,7 +127,16 @@
                       <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jMasterclassMinPoints" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="314" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jMasterclassDate1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jMasterclassDay" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jMasterclassMonth" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jMasterclassYear" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="jMasterclassInvalidInput" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jMasterclassButton" min="-2" max="-2" attributes="0"/>
@@ -184,10 +206,40 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jMasterclassInvalidInput">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel3"/>
+            <Property name="text" type="java.lang.String" value="do not delete"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jMasterclassLocationNumbers">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jMasterclassDate1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Datum"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jMasterclassDay">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="dd"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jMasterclassMonth">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="mm"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jMasterclassYear">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jjjj"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="/"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel6">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="/"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -208,34 +260,44 @@
                           <Component id="jLabel2" pref="437" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jTournamentButton" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTournamentInvalidInput" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel16" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel17" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jMasterclassDate" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jTournamentMaxParticipants" max="32767" attributes="0"/>
-                                  <Component id="jTournamentTables" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jRadioBridge" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jRadioPoker" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jRadioHearts" alignment="0" pref="210" max="32767" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTournamentMaxParticipants" max="32767" attributes="0"/>
+                              <Component id="jTournamentTables" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jRadioBridge" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jRadioPoker" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jRadioHearts" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="jTournamentLocationLetters" min="-2" pref="148" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jTournamentLocationNumbers" min="-2" pref="42" max="-2" attributes="0"/>
                               </Group>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jTournamentButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTournamentInvalidInput" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="jTournamentYear" min="-2" pref="75" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" min="-2" pref="4" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                  <Component id="jTournamentMonth" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jLabel4" min="-2" pref="4" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="jTournamentDay" min="-2" pref="50" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
@@ -249,12 +311,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="jTournamentLocationLetters" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTournamentLocationNumbers" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -275,7 +337,16 @@
                   <Component id="jRadioBridge" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jRadioHearts" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="265" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jMasterclassDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTournamentDay" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTournamentMonth" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTournamentYear" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="232" max="32767" attributes="0"/>
                   <Component id="jTournamentInvalidInput" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jTournamentButton" min="-2" max="-2" attributes="0"/>
@@ -352,12 +423,42 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jTournamentInvalidInput">
           <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel3"/>
+            <Property name="text" type="java.lang.String" value="do not delete"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTournamentLocationNumbers">
         </Component>
         <Component class="javax.swing.JTextField" name="jTournamentLocationLetters">
+        </Component>
+        <Component class="javax.swing.JLabel" name="jMasterclassDate">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Datum"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTournamentDay">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="dd"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTournamentMonth">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="mm"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTournamentYear">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jjjj"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="/"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel4">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="/"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

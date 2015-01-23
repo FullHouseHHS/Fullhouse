@@ -31,5 +31,32 @@ public final class InputVerifier {
         return input.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,4})$");
     }
+
+    static boolean checkDate(String day, String month, String year) {
+        
+        int dayInt;
+        int monthInt;
+        int yearInt;
+        
+        try {
+            dayInt = Integer.parseInt(day);
+            monthInt = Integer.parseInt(month);
+            yearInt = Integer.parseInt(year);
+            
+            if((yearInt % 4 == 0) && ((yearInt % 100 != 0) || (yearInt % 400 == 0))){
+                if (dayInt >= 0 ) {
+                    
+                }
+            }
+            
+            
+            
+            return true;
+        } catch (NumberFormatException e){
+            return false;
+        }
+        
+        
+    }
     
 }

@@ -190,8 +190,8 @@ DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
         }
         
         if(sw == sl) {
-            sc = 1.17;
-            scw = scw + 1.17;
+            sc = 25;
+            scw = scw + 25;
         }
         calculateLoser();
     }//GEN-LAST:event_btSetLoserActionPerformed
