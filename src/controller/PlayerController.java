@@ -104,7 +104,7 @@ public class PlayerController {
                 double rating = result.getInt("rating");
                 boolean is_famous = result.getBoolean("is_famous");
                 
-                Player player = new Player(id, name, telephoneNumber, emailAdress, rating, is_famous);
+                Player player = new Player( name, telephoneNumber, emailAdress, rating, is_famous);
                 players.add(player);
             }
 

@@ -6,23 +6,22 @@ package model;
  */
 public class Player {
     private String name;
-    private String emailAdress;
+    private String emailAddress;
     
     private int id;
     private int telephoneNumber;
     private double rating;
     
     private boolean is_famous;
-    //PlayerAdress playerAdress;
+    //PlayerAddresss playerAddress;
     
-    public Player(int id, String name, int telephoneNumber,String emailAdress, double rating, boolean is_famous/*, PlayerAdress playerAdress*/) {
-        this.id = id;
+    public Player(String name, int telephoneNumber,String emailAddress, double rating, boolean is_famous/*, PlayerAddress playerAddress*/) {
         this.name = name;
-        this.emailAdress = emailAdress;
+        this.emailAddress = emailAddress;
         this.telephoneNumber = telephoneNumber;
         this.rating = rating;
         this.is_famous = is_famous;
-        //this.playerAdress = playerAdress;
+        //this.playerAddress = playerAddress;
     }
 
     public boolean isIs_famous() {
@@ -45,12 +44,12 @@ public class Player {
         this.name = name;
     }
 
-    public String getEmailAdress() {
-        return emailAdress;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setEmailAdress(String emailAdress) {
-        this.emailAdress = emailAdress;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public int getTelephoneNumber() {
@@ -71,7 +70,7 @@ public class Player {
     /*
     @Override
     public String toString(){
-        return "" + name + "   " +  playerAdress.getCity() + "   " + playerAdress.getAdress() + "   " + playerAdress.getZipCode() + "   " + telephoneNumber + "   " + emailAdress + "   " + rating  ;    
+        return "" + name + "   " +  playerAddress.getCity() + "   " + playerAddress.getAddress() + "   " + playerAddress.getZipCode() + "   " + telephoneNumber + "   " + emailAddress + "   " + rating  ;    
     }*/
     
     public String[] getInfo() {

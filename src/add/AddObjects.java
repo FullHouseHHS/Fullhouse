@@ -18,6 +18,7 @@ public class AddObjects extends javax.swing.JPanel {
      */
     public AddObjects() {
         initComponents();
+        initList();
         jMasterclassInvalidInput.setVisible(false);
         jTournamentInvalidInput.setVisible(false);
     }
@@ -86,12 +87,6 @@ public class AddObjects extends javax.swing.JPanel {
         jLabel12.setText("Lesgevende speler");
 
         jLabel13.setText("Maximaal aantal deelnemers");
-
-        jMasterclassMaxParticipants.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMasterclassMaxParticipantsActionPerformed(evt);
-            }
-        });
 
         jMasterclassButton.setText("Voeg toe");
         jMasterclassButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -348,10 +343,6 @@ public class AddObjects extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMasterclassMaxParticipantsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMasterclassMaxParticipantsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMasterclassMaxParticipantsActionPerformed
-
     private void jMasterclassButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMasterclassButtonMouseClicked
         checkMasterclassInput();
     }//GEN-LAST:event_jMasterclassButtonMouseClicked
@@ -448,6 +439,9 @@ public class AddObjects extends javax.swing.JPanel {
         
         masterclassIncorrect = InputVerifier.checkNumbers(this.jMasterclassMinPoints.getText()) ? masterclassIncorrect : true;
         
+        masterclassIncorrect = InputVerifier.checkDate(this.jMasterclassDay.getText(), this.jMasterclassMonth.getText(), this.jMasterclassYear.getText()) 
+                ? masterclassIncorrect : true;
+        
         
         if (!masterclassIncorrect){
             //Add to database
@@ -480,6 +474,12 @@ public class AddObjects extends javax.swing.JPanel {
         this.jMasterclassDay.setText("");
         this.jMasterclassMonth.setText("");
         this.jMasterclassYear.setText("");
+    }
+
+    private void initList() {
+        //Read from database
+        //Put in jMasterclassPlayers
+        
     }
 
 

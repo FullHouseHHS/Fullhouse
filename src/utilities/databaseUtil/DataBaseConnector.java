@@ -39,12 +39,13 @@ public class DataBaseConnector
       dbserver="localhost";
       database="FullHouseGr11";
       username = "root";
-      password = "Password1";
+      password = "03D99E09F7";
    }
 
    /**
       Gets a connection to the database.
       @return the database connection
+     * @throws java.sql.SQLException
    */
    public static Connection getConnection() throws SQLException
    {
