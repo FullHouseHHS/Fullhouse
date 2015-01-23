@@ -109,16 +109,11 @@ public class PlayerController {
                 String emailAdress = result.getString("emailAdress");
                 double rating = result.getInt("rating");
                 boolean is_famous = result.getBoolean("is_famous");
-<<<<<<< HEAD
-                
-                Player player = new Player( name, telephoneNumber, emailAdress, rating, is_famous);
-=======
                 String address = result.getString("address");
                 String zipcode = result.getString("zipcode");
                 String city = result.getString("city");
     
                 Player player = new Player(id, name, telephoneNumber, emailAdress, rating, is_famous, address, zipcode, city);
->>>>>>> 09f592691479e89c90d22dbe830b2df8db7ae595
                 players.add(player);
             }
 
