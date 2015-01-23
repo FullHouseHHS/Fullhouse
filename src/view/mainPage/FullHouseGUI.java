@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fullhousegui;
+package view.mainPage;
 
-import add.AddObjects;
-import add.AddPlayer;
-import overview.Overview;
-import overview.PlayerOverview;
+import view.add.AddObjects;
+import view.add.AddPlayer;
+import view.overview.Overview;
+import view.overview.PlayerOverview;
 
 /**
  *

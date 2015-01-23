@@ -3,22 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package overview;
+package view.overview;
 
-import javax.swing.JTable;
+import java.util.Comparator;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author nikko
  */
-public class TournamentOverview extends javax.swing.JPanel {
+public class PlayerOverview extends javax.swing.JPanel {
 
     /**
      * Creates new form PlayerOverview
      */
-    public TournamentOverview() {
+    public PlayerOverview() {
         initComponents();
-        initTable();
+        initSorter();
     }
 
     /**
@@ -31,32 +33,32 @@ public class TournamentOverview extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTournamentTable = new javax.swing.JTable();
-        jSearchTournament = new javax.swing.JTextField();
+        jPlayerTable = new javax.swing.JTable();
+        jSearchPlayer = new javax.swing.JTextField();
 
-        jTournamentTable.setModel(new javax.swing.table.DefaultTableModel(
+        jPlayerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(1), "De natte krant",  new Integer(2), "2015-11-24", "Poker"},
-                { new Integer(2), "Bazellaan",  new Integer(444), "2016-01-22", "Poker"},
-                { new Integer(3), "Sprookjesbos",  new Integer(151), "2015-02-20", "Bridge"},
-                { new Integer(4), "Achtertuin",  new Integer(342), "2016-03-15", "Klaverjas"}
+                { new Integer(1), "Jan",  new Integer(1244),  new Double(1.0)},
+                { new Integer(2), "Kees",  new Integer(32131),  new Double(22222.0)},
+                { new Integer(3), "Piet",  new Integer(4325),  new Double(44542.0)},
+                { new Integer(4), "Hans",  new Integer(5532),  new Double(3342.0)}
             },
             new String [] {
-                "ID", "Locatie", "Ingeschreven spelers", "Datum", "Soort toernooi"
+                "ID", "Naam", "Rating", "Gewonnen inleggeld"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jTournamentTable.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTournamentTable);
+        jPlayerTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jPlayerTable);
 
-        jSearchTournament.setText("Zoek een toernooi..");
+        jSearchPlayer.setText("Zoek een speler..");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -65,31 +67,39 @@ public class TournamentOverview extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jSearchTournament, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jSearchPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSearchTournament, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSearchPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable jPlayerTable;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jSearchTournament;
-    private javax.swing.JTable jTournamentTable;
+    private javax.swing.JTextField jSearchPlayer;
     // End of variables declaration//GEN-END:variables
 
-    private void initTable() {
-        jTournamentTable.setAutoCreateRowSorter(true);
+    private void initSorter() {
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jPlayerTable.getModel());
+        jPlayerTable.setRowSorter(sorter);
+        
+        Comparator<String> comparator = new Comparator<String>() {
+
+            public int compare(String o1, String o2) {
+                return 0;
+            }
+        };
     }
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package overview;
+package view.overview;
 
 import java.util.Comparator;
 import javax.swing.table.TableModel;
@@ -13,12 +13,12 @@ import javax.swing.table.TableRowSorter;
  *
  * @author nikko
  */
-public class PlayerOverview extends javax.swing.JPanel {
+public class FuturePlayerOverview extends javax.swing.JPanel {
 
     /**
      * Creates new form PlayerOverview
      */
-    public PlayerOverview() {
+    public FuturePlayerOverview() {
         initComponents();
         initSorter();
     }
@@ -38,17 +38,17 @@ public class PlayerOverview extends javax.swing.JPanel {
 
         jPlayerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(1), "Jan",  new Integer(1244),  new Double(1.0)},
-                { new Integer(2), "Kees",  new Integer(32131),  new Double(22222.0)},
-                { new Integer(3), "Piet",  new Integer(4325),  new Double(44542.0)},
-                { new Integer(4), "Hans",  new Integer(5532),  new Double(3342.0)}
+                { new Integer(1), "Jan",  new Integer(1244), "De pot", null},
+                { new Integer(2), "Kees",  new Integer(32131), "De pot",  new Boolean(true)},
+                { new Integer(3), "Piet",  new Integer(4325), "De pot",  new Boolean(true)},
+                { new Integer(1), "Jan",  new Integer(1244), "Vuil gebeuren",  new Boolean(true)}
             },
             new String [] {
-                "ID", "Naam", "Rating", "Gewonnen inleggeld"
+                "Speler ID", "Naam", "Rating", "Toernooi", "Inleggeld betaald"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
