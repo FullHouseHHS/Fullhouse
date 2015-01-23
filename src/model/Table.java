@@ -5,7 +5,6 @@
  */
 package model;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -13,11 +12,9 @@ import java.util.ArrayList;
  */
 public class Table {
     private int tableNumber;
-    ArrayList<Player> playerList;
     
-    public Table(int tableNumber, ArrayList<Player> playerList){
+    public Table(int tableNumber){
         this.tableNumber = tableNumber;
-        this.playerList = playerList;
     }
 
     public int getTableNumber() {
@@ -28,13 +25,8 @@ public class Table {
         this.tableNumber = tableNumber;
     }
 
-    public ArrayList<Player> getPlayerList() {
-        return playerList;
+    @Override
+    public String toString(){
+        return "" + tableNumber + "   ";
     }
-
-    public void setPlayerList(ArrayList<Player> playerList) {
-        this.playerList = playerList;
-    }
-    
-    
 }

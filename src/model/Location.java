@@ -13,22 +13,12 @@ public class Location {
     
     private String adress;
     private String location;
-    private int capacity;
-    private int maxTabels;
+    private int maxTables;
     
-    public Location(String adress, String location, int capacity, int maxTables) {
+    public Location(String adress, String location, int maxTables) {
         this.adress = adress;
         this.location = location;
-        this.capacity = capacity;
-        this.maxTabels = maxTables;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+        this.maxTables = maxTables;
     }
 
     public String getLocation() {
@@ -47,11 +37,16 @@ public class Location {
         this.adress = adress;
     }
 
-    public int getMaxTabels() {
-        return maxTabels;
+    public int getMaxTables() {
+        return maxTables;
     }
 
-    public void setMaxTabels(int maxTabels) {
-        this.maxTabels = maxTabels;
+    public void setMaxTables(int maxTables) {
+        this.maxTables = maxTables;
+    }
+    
+    @Override
+    public String toString(){
+        return "" + location + "   " + adress + "   " + maxTables + "   ";  
     }
 }

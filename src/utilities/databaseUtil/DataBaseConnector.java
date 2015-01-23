@@ -37,7 +37,7 @@ public class DataBaseConnector
       }
 
       dbserver="localhost";
-      database="FullHouseGr11";
+      database="fullhousegr11";
       username = "root";
       password = "03D99E09F7";
    }

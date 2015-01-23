@@ -40,7 +40,12 @@ DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
                 double rating = result.getDouble("rating");
                 boolean is_famous = result.getBoolean("is_famous");
                 
+<<<<<<< HEAD
                 Player player = new Player(name, telephoneNumber, emailAdress, rating, is_famous);
+=======
+                
+                Player player = new Player(id, name, telephoneNumber, emailAdress, rating, is_famous, PlayerAdress playerAdress);
+>>>>>>> 09f592691479e89c90d22dbe830b2df8db7ae595
                 players.add(player);
                 
                 modelPlayer.addRow(player.getInfo());
@@ -180,6 +185,7 @@ DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
 
     private void btSetLoserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSetLoserActionPerformed
         if(sw > sl) {
+<<<<<<< HEAD
             sc = (sw - sl)/4 + 1;
             scw = scw + (sw - sl)/4 + 1;
         }
@@ -187,6 +193,15 @@ DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
         if(sw < sl) {
             sc = (sl - sw)/8 + 1;
             scw = scw + (sl - sw)/8 + 1;
+=======
+            sc = (sw - sl)/4 + 25;
+            scw = scw + (sw - sl)/4 + 25;
+        }
+        
+        if(sw < sl) {
+            sc = (sl - sw)/8 + 25;
+            scw = scw + (sl - sw)/8 + 25;
+>>>>>>> 09f592691479e89c90d22dbe830b2df8db7ae595
         }
         
         if(sw == sl) {

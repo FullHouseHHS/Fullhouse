@@ -21,24 +21,28 @@ import model.Player;
 public class PlayerController {
     private static ArrayList<Player> players;
     
-    public static void addPlayer(String name,int telephoneNumber,String emailAdress,double rating, boolean is_famous){
+    public static void addPlayer(String name,int telephoneNumber,String emailAdress,double rating, boolean is_famous, String address, String zipcode, String city){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
-            String prepStatInsertKlant = "INSERT INTO player (name, telephoneNumber, emailAdress, rating, is_famous) "
-                                                   + "VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement prepStat =  conn.prepareStatement(prepStatInsertKlant);
+            //player
+            String prepStatInsertPlayer = "INSERT INTO player (name, telephoneNumber, emailAdress, rating, is_famous, address, zipcode, city) "
+                                                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement prepStat =  conn.prepareStatement(prepStatInsertPlayer);
             
             prepStat.setString(1, name);
             prepStat.setInt(2, telephoneNumber);
             prepStat.setString(3, emailAdress);
             prepStat.setDouble(4, rating);
             prepStat.setBoolean(5, is_famous);
+            prepStat.setString(6, address);
+            prepStat.setString(7, zipcode);
+            prepStat.setString(8, city);
             
             System.out.println(prepStat);
             prepStat.executeUpdate();
-        
+            
             stat.close();
         }
         catch (SQLException exc) {
@@ -46,12 +50,12 @@ public class PlayerController {
         }
     }
     
-    public static void updatePlayer(String name, int telephoneNumber, String emailAdress, double rating, boolean is_famous, Player player){
+    public static void updatePlayer(String name, int telephoneNumber, String emailAdress, double rating, boolean is_famous, String address, String zipcode, String city, Player player){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
-            String prepStatChangeKlant = "UPDATE player SET name=?, telephoneNumber=?, emailAdress=?, rating=?, is_famous WHERE id = ?";
+            String prepStatChangeKlant = "UPDATE player SET name=?, telephoneNumber=?, emailAdress=?, rating=?, is_famous=?, address=?, zipcode=?, city=? WHERE id = ?";
             
             PreparedStatement prepStat =  conn.prepareStatement(prepStatChangeKlant);
             
@@ -59,12 +63,14 @@ public class PlayerController {
             prepStat.setInt(2, telephoneNumber);
             prepStat.setString(3, emailAdress);
             prepStat.setDouble(4, rating);
-            prepStat.setInt(5, player.getId());
-            prepStat.setBoolean(6, is_famous);
+            prepStat.setBoolean(5, is_famous);
+            prepStat.setString(6, address);
+            prepStat.setString(7, zipcode);
+            prepStat.setString(8, city);
+            prepStat.setInt(9, player.getId());
             
             System.out.println(prepStat);
             prepStat.executeUpdate();
-            
             stat.close();
         }
         catch (SQLException exc) {
@@ -103,8 +109,16 @@ public class PlayerController {
                 String emailAdress = result.getString("emailAdress");
                 double rating = result.getInt("rating");
                 boolean is_famous = result.getBoolean("is_famous");
+<<<<<<< HEAD
                 
                 Player player = new Player( name, telephoneNumber, emailAdress, rating, is_famous);
+=======
+                String address = result.getString("address");
+                String zipcode = result.getString("zipcode");
+                String city = result.getString("city");
+    
+                Player player = new Player(id, name, telephoneNumber, emailAdress, rating, is_famous, address, zipcode, city);
+>>>>>>> 09f592691479e89c90d22dbe830b2df8db7ae595
                 players.add(player);
             }
 

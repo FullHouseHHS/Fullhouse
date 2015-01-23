@@ -3,24 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package overview;
+package view.overview;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Comparator;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import model.Player;
+import utilities.databaseUtil.DataBaseConnector;
 
 /**
  *
  * @author nikko
  */
-public class FuturePlayerOverview extends javax.swing.JPanel {
+public class PlayerOverview extends javax.swing.JPanel {
 
+    
+    Player player;
+    
     /**
      * Creates new form PlayerOverview
      */
-    public FuturePlayerOverview() {
+    public PlayerOverview() {
         initComponents();
         initSorter();
+        getPlayers();
     }
 
     /**
@@ -38,17 +48,14 @@ public class FuturePlayerOverview extends javax.swing.JPanel {
 
         jPlayerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(1), "Jan",  new Integer(1244), "De pot", null},
-                { new Integer(2), "Kees",  new Integer(32131), "De pot",  new Boolean(true)},
-                { new Integer(3), "Piet",  new Integer(4325), "De pot",  new Boolean(true)},
-                { new Integer(1), "Jan",  new Integer(1244), "Vuil gebeuren",  new Boolean(true)}
+
             },
             new String [] {
-                "Speler ID", "Naam", "Rating", "Toernooi", "Inleggeld betaald"
+                "Naam", "Tel.", "E-mail", "Rating", "Is bekend", "Adres", "Postcode", "Stad"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -101,5 +108,31 @@ public class FuturePlayerOverview extends javax.swing.JPanel {
                 return 0;
             }
         };
+    }
+
+    private void getPlayers() {
+        try {
+            
+            Connection conn = DataBaseConnector.getConnection();
+        
+            Statement stat = conn.createStatement();
+            
+            ResultSet result = stat.executeQuery("SELECT * FROM PLAYERS");
+            
+            while(result.next()){
+                result.getString("name");
+                result.getString("name");
+                result.getString("name");
+                result.getString("name");
+                result.getString("name");
+                
+                
+                System.out.println(result.getString("name"));
+                
+            }
+            
+        } catch (SQLException e){
+            
+        }
     }
 }
