@@ -11,5 +11,10 @@ package model;
  * @author Jeroen
  */
 public class TableInfo {
+    Table table;
+    Round round;
+    Tournament tournament;
+    Player player;
+    boolean winner;
     
 }
