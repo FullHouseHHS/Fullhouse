@@ -14,11 +14,13 @@ import java.util.List;
 public class Round {
     
     private int roundNumber;
-    List<Table> tables;
+    Player player;
+    Tournament tournament;
     
-    public Round(int roundNumber, List<Table> tables){
+    public Round(int roundNumber, Player player, Tournament tournament){
         this.roundNumber = roundNumber;
-        this.tables = tables;
+        this.player = player;
+        this.tournament = tournament;
     }
 
     public int getRoundNumber() {
@@ -28,12 +30,25 @@ public class Round {
     public void setRoundNumber(int roundNumber) {
         this.roundNumber = roundNumber;
     }
-
-    public List<Table> getTables() {
-        return tables;
+    
+    public Player getPlayer() {
+        return player;
     }
-
-    public void setTables(List<Table> tables) {
-        this.tables = tables;
+    
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+    
+    public Tournament getTournament() {
+        return tournament;
+    }
+    
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
+    }
+    
+    @Override
+    public String toString(){
+        return "" + roundNumber + "   " + player.getId() + "   " + tournament.getTournamentId() + "   ";
     }
 }
