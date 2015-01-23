@@ -16,7 +16,6 @@ public class Tournament {
     Player firstPlace;
     Player secondPlace;
     Player thirdPlace;
-    TournamentType tournamentType;
     ArrayList<Player> playerList;
 
     public Tournament(int tournamentId, Player firstPlace, Player secondPlace, Player thirdPlace, TournamentType tournamentType, ArrayList<Player> playerList) {
@@ -27,14 +26,8 @@ public class Tournament {
         this.playerList = playerList;
     }
 
-    public TournamentType getTournamentType() {
-        return tournamentType;
-    }
-
-    public void setTournamentType(TournamentType tournamentType) {
-        this.tournamentType = tournamentType;
-    }
-
+    public enum TournamentType { POKER, PLAY JASS, BRIDGE};
+    
     public int getTournamentId() {
         return tournamentId;
     }
