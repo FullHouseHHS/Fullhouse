@@ -13,16 +13,16 @@ public class Player {
     private double rating;
     
     private boolean is_famous;
-    //PlayerAdress playerAdress;
+    PlayerAdress playerAdress;
     
-    public Player(int id, String name, int telephoneNumber,String emailAdress, double rating, boolean is_famous/*, PlayerAdress playerAdress*/) {
+    public Player(int id, String name, int telephoneNumber,String emailAdress, double rating, boolean is_famous, PlayerAdress playerAdress) {
         this.id = id;
         this.name = name;
         this.emailAdress = emailAdress;
         this.telephoneNumber = telephoneNumber;
         this.rating = rating;
         this.is_famous = is_famous;
-        //this.playerAdress = playerAdress;
+        this.playerAdress = playerAdress;
     }
 
     public boolean isIs_famous() {
@@ -68,11 +68,19 @@ public class Player {
     public void setRating(double rating) {
         this.rating = rating;
     }
-    /*
+    
+    public PlayerAdress getPlayerAdress() {
+        return playerAdress;
+    }
+    
+    public void setPlayerAdress(PlayerAdress playerAdress) {
+        this.playerAdress = playerAdress;
+    }
+    
     @Override
     public String toString(){
-        return "" + name + "   " +  playerAdress.getCity() + "   " + playerAdress.getAdress() + "   " + playerAdress.getZipCode() + "   " + telephoneNumber + "   " + emailAdress + "   " + rating  ;    
-    }*/
+        return "" + id + "   " + name + "   " + rating + "   " + playerAdress.getCity() + "   " + playerAdress.getAdress() + "   " + playerAdress.getZipCode() + "   " + telephoneNumber + "   " + emailAdress + "   ";    
+    }
     
     public String[] getInfo() {
         return new String[]{"" + id, "" + rating};
