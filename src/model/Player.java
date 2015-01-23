@@ -13,36 +13,21 @@ public class Player {
     private double rating;
     
     private boolean is_famous;
-<<<<<<< HEAD
-    PlayerAdress playerAdress;
-    
-    public Player(int id, String name, int telephoneNumber,String emailAdress, double rating, boolean is_famous, PlayerAdress playerAdress) {
-=======
     private String adress;
     private String city;
     private String zipCode;
     
     public Player(int id, String name, int telephoneNumber,String emailAdress, double rating, boolean is_famous, String adress, String city, String zipCode) {
->>>>>>> ab5403d2caa75c9201eb1c0f5d4eaa79df00ab24
         this.id = id;
         this.name = name;
         this.emailAdress = emailAdress;
         this.telephoneNumber = telephoneNumber;
         this.rating = rating;
         this.is_famous = is_famous;
-<<<<<<< HEAD
-        this.playerAdress = playerAdress;
-    }
 
-    public boolean isIs_famous() {
-=======
-        this.adress = adress;
-        this.city = city;
-        this.zipCode = zipCode;
     }
 
     public boolean getIs_famous() {
->>>>>>> ab5403d2caa75c9201eb1c0f5d4eaa79df00ab24
         return is_famous;
     }
 
@@ -85,20 +70,7 @@ public class Player {
     public void setRating(double rating) {
         this.rating = rating;
     }
-    
-<<<<<<< HEAD
-    public PlayerAdress getPlayerAdress() {
-        return playerAdress;
-    }
-    
-    public void setPlayerAdress(PlayerAdress playerAdress) {
-        this.playerAdress = playerAdress;
-    }
-    
-    @Override
-    public String toString(){
-        return "" + id + "   " + name + "   " + rating + "   " + playerAdress.getCity() + "   " + playerAdress.getAdress() + "   " + playerAdress.getZipCode() + "   " + telephoneNumber + "   " + emailAdress + "   ";    
-=======
+
     public String getAdress() {
         return adress;
     }
@@ -127,7 +99,6 @@ public class Player {
     @Override
     public String toString(){
         return "" + id + "   " + name + "   " + rating + "   " + adress + "   " + city + "   " +  zipCode + "   " + telephoneNumber + "   " + emailAdress + "   ";    
->>>>>>> ab5403d2caa75c9201eb1c0f5d4eaa79df00ab24
     }
     
     public String[] getInfo() {
