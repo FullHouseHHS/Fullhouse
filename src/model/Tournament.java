@@ -5,7 +5,6 @@
  */
 package model;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -13,20 +12,14 @@ import java.util.ArrayList;
  */
 public class Tournament {
     private int tournamentId;
-    Player firstPlace;
-    Player secondPlace;
-    Player thirdPlace;
-    ArrayList<Player> playerList;
+    Location location;
 
-    public Tournament(int tournamentId, Player firstPlace, Player secondPlace, Player thirdPlace, TournamentType tournamentType, ArrayList<Player> playerList) {
+    public Tournament(int tournamentId, Location location) {
         this.tournamentId = tournamentId;
-        this.firstPlace = firstPlace;
-        this.secondPlace = secondPlace;
-        this.thirdPlace = thirdPlace;
-        this.playerList = playerList;
+        this.location = location;
     }
 
-    public enum TournamentType { POKER, PLAY JASS, BRIDGE};
+    //public enum TournamentType { POKER, PLAY JASS, BRIDGE};
     
     public int getTournamentId() {
         return tournamentId;
@@ -35,37 +28,17 @@ public class Tournament {
     public void setTournamentId(int tournamentId) {
         this.tournamentId = tournamentId;
     }
-
-    public Player getFirstPlace() {
-        return firstPlace;
-    }
-
-    public void setFirstPlace(Player firstPlace) {
-        this.firstPlace = firstPlace;
-    }
-
-    public Player getSecondPlace() {
-        return secondPlace;
-    }
-
-    public void setSecondPlace(Player secondPlace) {
-        this.secondPlace = secondPlace;
-    }
-
-    public Player getThirdPlace() {
-        return thirdPlace;
-    }
-
-    public void setThirdPlace(Player thirdPlace) {
-        this.thirdPlace = thirdPlace;
-    }
-
-    public ArrayList<Player> getPlayerList() {
-        return playerList;
-    }
-
-    public void setPlayerList(ArrayList<Player> playerList) {
-        this.playerList = playerList;
+    
+    public Location getLocation() {
+        return location;
     }
     
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+    
+    @Override
+    public String toString(){
+        return "" + tournamentId + "   " + location.getAdress() + "   " + location.getLocation() + "   ";
+    }
 }
