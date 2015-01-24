@@ -12,17 +12,23 @@ import java.util.ArrayList;
  * @author CVD
  */
 public class Masterclass {
+    private int m_id;
     private int minRating;
     private int maxParticipants;
     Player lecturer;
     
     ArrayList<Player> playerList;
     
-    public Masterclass(Player lecturer, int maxParticipants, int minRating, ArrayList<Player> playerList){
+    public Masterclass(Player lecturer,int m_id, int maxParticipants, int minRating, ArrayList<Player> playerList){
         this.lecturer = lecturer;
+        this.m_id = m_id;
         this.maxParticipants = maxParticipants;
         this.minRating = minRating;
         this.playerList = playerList;
+    }
+    
+    public int getId(){
+        return m_id;
     }
 
     public int getMinRating() {
