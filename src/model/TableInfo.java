@@ -15,15 +15,22 @@ public class TableInfo {
     Round round;
     Tournament tournament;
     Player player;
-    //enum winner;
+    private boolean winner;
     
-    public TableInfo(Table table, Round round, Tournament tournament, Player player) {
+    public TableInfo(Table table, Round round, Tournament tournament, Player player, boolean winner) {
         this.table = table;
         this.round = round;
         this.tournament = tournament;
         this.player = player;
-        //this.winner = winner;
-        
+        this.winner = winner;
+    }
+
+    public boolean isWinner() {
+        return winner;
+    }
+
+    public void setWinner(boolean winner) {
+        this.winner = winner;
     }
 
     public Table getTable() {
