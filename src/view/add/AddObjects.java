@@ -5,24 +5,40 @@
  */
 package view.add;
 
+import controller.LocationController;
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import model.Location;
 
 /**
  *
  * @author nikko
  */
 public class AddObjects extends javax.swing.JPanel {
-    
+    ArrayList<Location> locations;
     /**
      * Creates new form AddObjects
      */
     public AddObjects() {
+        this.locations = LocationController.getLocations();
         initComponents();
         initList();
+        
         jMasterclassInvalidInput.setVisible(false);
         jTournamentInvalidInput.setVisible(false);
     }
     
+    public void fillLocationComboBox(){
+        DefaultComboBoxModel modelMasterclassLocation = new DefaultComboBoxModel();
+        DefaultComboBoxModel modelTournamentLocation = new DefaultComboBoxModel();
+               
+        for(Location location: locations){
+            modelMasterclassLocation.addElement(location);
+            modelTournamentLocation.addElement(location);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,7 +51,6 @@ public class AddObjects extends javax.swing.JPanel {
         buttonGroup2 = new javax.swing.ButtonGroup();
         jPanelMasterclass = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jMasterclassLocationLetters = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jMasterclassPlayers = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
@@ -45,13 +60,13 @@ public class AddObjects extends javax.swing.JPanel {
         jLabel18 = new javax.swing.JLabel();
         jMasterclassMinPoints = new javax.swing.JTextField();
         jMasterclassInvalidInput = new javax.swing.JLabel();
-        jMasterclassLocationNumbers = new javax.swing.JTextField();
         jMasterclassDate1 = new javax.swing.JLabel();
         jMasterclassDay = new javax.swing.JTextField();
         jMasterclassMonth = new javax.swing.JTextField();
         jMasterclassYear = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        MasterclassLocation = new javax.swing.JComboBox();
         jPanelTournament = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -65,14 +80,13 @@ public class AddObjects extends javax.swing.JPanel {
         jRadioHearts = new javax.swing.JRadioButton();
         jTournamentButton = new javax.swing.JButton();
         jTournamentInvalidInput = new javax.swing.JLabel();
-        jTournamentLocationNumbers = new javax.swing.JTextField();
-        jTournamentLocationLetters = new javax.swing.JTextField();
         jMasterclassDate = new javax.swing.JLabel();
         jTournamentDay = new javax.swing.JTextField();
         jTournamentMonth = new javax.swing.JTextField();
         jTournamentYear = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        TournamentLocation = new javax.swing.JComboBox();
 
         jPanelMasterclass.setBackground(new java.awt.Color(220, 240, 240));
 
@@ -111,6 +125,13 @@ public class AddObjects extends javax.swing.JPanel {
 
         jLabel6.setText("/");
 
+        MasterclassLocation.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        MasterclassLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MasterclassLocationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelMasterclassLayout = new javax.swing.GroupLayout(jPanelMasterclass);
         jPanelMasterclass.setLayout(jPanelMasterclassLayout);
         jPanelMasterclassLayout.setHorizontalGroup(
@@ -130,10 +151,7 @@ public class AddObjects extends javax.swing.JPanel {
                             .addComponent(jMasterclassMinPoints)
                             .addComponent(jMasterclassPlayers, javax.swing.GroupLayout.Alignment.TRAILING, 0, 210, Short.MAX_VALUE)
                             .addComponent(jMasterclassMaxParticipants)
-                            .addGroup(jPanelMasterclassLayout.createSequentialGroup()
-                                .addComponent(jMasterclassLocationLetters, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jMasterclassLocationNumbers, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(MasterclassLocation, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMasterclassLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanelMasterclassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,9 +178,8 @@ public class AddObjects extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMasterclassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jMasterclassLocationLetters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(jMasterclassLocationNumbers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MasterclassLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMasterclassLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jMasterclassPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,7 +200,7 @@ public class AddObjects extends javax.swing.JPanel {
                     .addComponent(jMasterclassYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 276, Short.MAX_VALUE)
                 .addComponent(jMasterclassInvalidInput)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jMasterclassButton)
@@ -234,6 +251,8 @@ public class AddObjects extends javax.swing.JPanel {
 
         jLabel4.setText("/");
 
+        TournamentLocation.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanelTournamentLayout = new javax.swing.GroupLayout(jPanelTournament);
         jPanelTournament.setLayout(jPanelTournamentLayout);
         jPanelTournamentLayout.setHorizontalGroup(
@@ -264,10 +283,6 @@ public class AddObjects extends javax.swing.JPanel {
                             .addComponent(jRadioPoker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jRadioHearts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTournamentLayout.createSequentialGroup()
-                                .addComponent(jTournamentLocationLetters, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTournamentLocationNumbers, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelTournamentLayout.createSequentialGroup()
                                 .addComponent(jTournamentYear, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,8 +290,9 @@ public class AddObjects extends javax.swing.JPanel {
                                 .addComponent(jTournamentMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTournamentDay, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                                .addComponent(jTournamentDay, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(TournamentLocation, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanelTournamentLayout.setVerticalGroup(
@@ -285,12 +301,10 @@ public class AddObjects extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addGroup(jPanelTournamentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelTournamentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTournamentLocationLetters, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTournamentLocationNumbers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel14))
-                .addGap(18, 18, 18)
+                .addGroup(jPanelTournamentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(TournamentLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jPanelTournamentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jTournamentMaxParticipants, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -314,7 +328,7 @@ public class AddObjects extends javax.swing.JPanel {
                     .addComponent(jTournamentYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 232, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                 .addComponent(jTournamentInvalidInput)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTournamentButton)
@@ -350,11 +364,17 @@ public class AddObjects extends javax.swing.JPanel {
     private void jTournamentButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTournamentButtonMouseClicked
         checkTournamentInput();
     }//GEN-LAST:event_jTournamentButtonMouseClicked
+
+    private void MasterclassLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MasterclassLocationActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MasterclassLocationActionPerformed
     
     
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox MasterclassLocation;
+    private javax.swing.JComboBox TournamentLocation;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -375,8 +395,6 @@ public class AddObjects extends javax.swing.JPanel {
     private javax.swing.JLabel jMasterclassDate1;
     private javax.swing.JTextField jMasterclassDay;
     private javax.swing.JLabel jMasterclassInvalidInput;
-    private javax.swing.JTextField jMasterclassLocationLetters;
-    private javax.swing.JTextField jMasterclassLocationNumbers;
     private javax.swing.JTextField jMasterclassMaxParticipants;
     private javax.swing.JTextField jMasterclassMinPoints;
     private javax.swing.JTextField jMasterclassMonth;
@@ -390,8 +408,6 @@ public class AddObjects extends javax.swing.JPanel {
     private javax.swing.JButton jTournamentButton;
     private javax.swing.JTextField jTournamentDay;
     private javax.swing.JLabel jTournamentInvalidInput;
-    private javax.swing.JTextField jTournamentLocationLetters;
-    private javax.swing.JTextField jTournamentLocationNumbers;
     private javax.swing.JTextField jTournamentMaxParticipants;
     private javax.swing.JTextField jTournamentMonth;
     private javax.swing.JTextField jTournamentTables;
@@ -400,11 +416,7 @@ public class AddObjects extends javax.swing.JPanel {
 
     private void checkTournamentInput() {
         boolean tournamentIncorrect = false;
-        
-        //Adres
-        tournamentIncorrect = InputVerifier.checkLetters(this.jTournamentLocationLetters.getText()) ? tournamentIncorrect : true;
-        tournamentIncorrect = InputVerifier.checkNumbers(this.jTournamentLocationNumbers.getText()) ? tournamentIncorrect : true;
-        
+                
         //Aantal deelnemers
         tournamentIncorrect = InputVerifier.checkNumbers(this.jTournamentMaxParticipants.getText()) ? tournamentIncorrect : true;
         
@@ -431,10 +443,7 @@ public class AddObjects extends javax.swing.JPanel {
 
     private void checkMasterclassInput() {
         boolean masterclassIncorrect = false;
-        
-        masterclassIncorrect = InputVerifier.checkLetters(this.jMasterclassLocationLetters.getText()) ? masterclassIncorrect : true;
-        masterclassIncorrect = InputVerifier.checkNumbers(this.jMasterclassLocationNumbers.getText()) ? masterclassIncorrect : true;
-        
+                
         masterclassIncorrect = InputVerifier.checkNumbers(this.jMasterclassMaxParticipants.getText()) ? masterclassIncorrect : true;
         
         masterclassIncorrect = InputVerifier.checkNumbers(this.jMasterclassMinPoints.getText()) ? masterclassIncorrect : true;
@@ -457,8 +466,6 @@ public class AddObjects extends javax.swing.JPanel {
     }
     
     private void clearTournamentFields() {
-        this.jTournamentLocationLetters.setText("");
-        this.jTournamentLocationNumbers.setText("");
         this.jTournamentMaxParticipants.setText("");
         this.jTournamentTables.setText("");
         this.jTournamentDay.setText("");
@@ -467,8 +474,6 @@ public class AddObjects extends javax.swing.JPanel {
     }
     
     private void clearMasterclassFields() {
-        this.jMasterclassLocationLetters.setText("");
-        this.jMasterclassLocationNumbers.setText("");
         this.jMasterclassMaxParticipants.setText("");
         this.jMasterclassMinPoints.setText("");
         this.jMasterclassDay.setText("");

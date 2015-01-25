@@ -52,7 +52,7 @@ public class PlayerController {
             System.out.println(prepStat);
             prepStat.executeUpdate();
             stat.close();
-            return "Succesvol aan database toegevoegd!";
+            return "Succesvol de speler toegevoegd!";
         }
         catch (SQLException exc) {
             System.out.println("Sql fout bij het toevoegen van de speler: " + exc.toString());
@@ -60,7 +60,7 @@ public class PlayerController {
         }
     }
     
-    public static void updatePlayer(String surname, String lastName, int telephoneNumber, String emailAddress, double rating, boolean is_famous, String address, String zipcode, String city, Player player){
+    public static String updatePlayer(String surname, String lastName, int telephoneNumber, String emailAddress, double rating, boolean is_famous, String address, String zipcode, String city, Player player){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
@@ -90,13 +90,15 @@ public class PlayerController {
             System.out.println(prepStat);
             prepStat.executeUpdate();
             stat.close();
+            return "Succesvol de speler gewijzigd!";
         }
         catch (SQLException exc) {
             System.err.println("Sql fout bij het wijzigen van de speler: " + exc.toString());
+            return "Sql fout bij het wijzigen van de speler.";
         }
     }
     
-    public static void deletePlayer(Player player){
+    public static String deletePlayer(Player player){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
@@ -108,13 +110,15 @@ public class PlayerController {
             
             prepStat.executeUpdate();
             stat.close();
+            return "Succesvol de speler verwijderd!";
         }
         catch (SQLException exc) {
             System.err.println("Sql fout bij het verwijderen van de speler: " + exc.toString());
+            return "Sql fout bij het verwijderen van de speler.";
         }
     }
     
-    public static void getAllPlayers(){
+    public static String getAllPlayers(){
         try {
             Connection conn = DataBaseConnector.getConnection();
             Statement stat = conn.createStatement();
@@ -140,9 +144,10 @@ public class PlayerController {
 
             result.close();
             stat.close();
-
+            return "Succesvol alle spelers opgehaald!";
         } catch (SQLException exc) {
             System.err.println("Sql fout bij het ophalen van de spelers: " + exc.toString());
+            return "Sql fout bij het ophalen van de spelers.";
         }
     }
     

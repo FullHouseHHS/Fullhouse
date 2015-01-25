@@ -5,10 +5,17 @@
  */
 package controller;
 
+import java.util.ArrayList;
+import model.Location;
+
 /**
  *
  * @author CVD
  */
 public class LocationController {
+    private static ArrayList<Location> locations;
     
+    public static ArrayList<Location> getLocations() {
+        return locations;
+    }
 }
