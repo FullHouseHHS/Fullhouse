@@ -1,10 +1,10 @@
-package view.RatingSystem;
+package view.ratingSystem;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import javax.swing.table.TableModel;
-import javax.swing.table.DefaultTableModel;
+//import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import model.Player;
 import utilities.databaseUtil.DataBaseConnector;
@@ -21,9 +21,9 @@ Player winner;
 Player loser;
 Player player;
 private ArrayList<Player> players = new ArrayList();
-String[] columns = {"id", "rating"};
+//String[] columns = {"id", "rating"};
 
-DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
+//DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
 
     
     public RatingSystem() {
@@ -32,7 +32,7 @@ DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
         getPlayers();
         //fillPlayerList();
     }
-
+/*
     public void fillPlayerList(){
         try{
             Connection conn = DataBaseConnector.getConnection();
@@ -64,17 +64,19 @@ DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
             System.err.println("Sql fout bij het ophalen van spelers: " + exc.toString());
         }
     }
-    
+    */    
     public void calculateWinner(){
         Player player = this.players.get(selectedIndexW);
         player.setRating(player.getRating() + sc);
-        modelPlayer.setValueAt(player.getRating(), selectedIndexW, 1);    
+        
+        //modelPlayer.setValueAt(player.getRating(), selectedIndexW, 1);    
     }
     
     public void calculateLoser(){
         Player player = this.players.get(selectedIndexL);
         player.setRating(player.getRating() - sc);
-        modelPlayer.setValueAt(player.getRating(), selectedIndexL, 1);
+        
+        //modelPlayer.setValueAt(player.getRating(), selectedIndexL, 1);
         //modelPlayer.removeRow(selectedIndexL);
     }
     
