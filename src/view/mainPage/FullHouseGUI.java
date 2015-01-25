@@ -8,7 +8,6 @@ package view.mainPage;
 import view.add.AddObjects;
 import view.add.AddPlayer;
 import view.overview.Overview;
-import view.overview.PlayerOverview;
 
 /**
  *
@@ -84,7 +83,7 @@ public class FullHouseGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FullHouseGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

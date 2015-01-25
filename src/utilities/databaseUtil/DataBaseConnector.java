@@ -39,7 +39,7 @@ public class DataBaseConnector
       dbserver="localhost";
       database="fullhousegr11";
       username = "root";
-      password = "03D99E09F7";
+      password = "Password1";
    }
 
    /**

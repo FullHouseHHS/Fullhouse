@@ -5,6 +5,7 @@
  */
 package utilities;
 
+import controller.EnrollmentController;
 import controller.PlayerController;
 import controller.TableController;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class TableDistribution {
     //int maxTables or make use of Location location
     public TableDistribution(int maxTables){
         this.tables = TableController.getTables();
-        this.players = PlayerController.getPlayers();
+        this.players = EnrollmentController.getAllPlayersByTournament(2);
 
         //random order
         Collections.shuffle(players);

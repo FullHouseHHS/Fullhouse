@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 
 /**
  *
@@ -39,6 +41,6 @@ public class Tournament {
     
     @Override
     public String toString(){
-        return "" + tournamentId + "   " + location.getAdress() + "   " + location.getLocation() + "   ";
+        return "" + tournamentId + "   " + location.getAddress() + "   " + location.getLocation() + "   ";
     }
 }

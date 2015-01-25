@@ -13,13 +13,13 @@ import java.util.Date;
  */
 public class Enrollment {
     private Date date;
-    private boolean paid;
+    //private boolean paid;
     Player player;
     Tournament tournament;
     
-    public Enrollment(Date date, boolean paid, Player player, Tournament tournament) {
+    public Enrollment(Date date, /*boolean paid,*/ Player player, Tournament tournament) {
             this.date = date;
-            this.paid = paid;
+            //this.paid = paid;
             this.player = player;
             this.tournament = tournament;
     }
@@ -31,7 +31,7 @@ public class Enrollment {
     public void setDate(Date date) {
         this.date = date;
     }
-    
+/*    
     public boolean getPaid() {
         return paid;
     }
@@ -39,7 +39,7 @@ public class Enrollment {
     public void setPaid(boolean paid) {
         this.paid = paid;
     }
-    
+*/    
     public Player getPlayer() {
         return player;
     }
@@ -58,6 +58,6 @@ public class Enrollment {
     
     @Override
     public String toString(){
-        return "" + player.getId() + "   " + tournament.getTournamentId() + "   " + date + "   " + paid + "   ";
+        return "" + player.getId() + "   " + tournament.getTournamentId() + "   " + date + "   "/* + paid + "   "*/;
     }
 }

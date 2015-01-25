@@ -12,16 +12,22 @@ package view.add;
  */
 public final class InputVerifier {
     public static boolean checkNumbers(String input) {
-
         try {
             Integer.parseInt(input);
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
-
     }
-
+    
+    public static boolean checkAmountOfCharacters(String input, int length) {
+        return input.length() == length;
+    }
+    
+    public static boolean checkAmountOfCharacters(String input, int minLength, int maxLength){
+        return (input.length() < maxLength && input.length() > minLength);
+    }
+    
     public static boolean checkLetters(String input) {
         return input.matches("[a-zA-Z]+");
     }
