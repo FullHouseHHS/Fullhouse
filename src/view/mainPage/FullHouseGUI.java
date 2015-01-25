@@ -9,7 +9,6 @@ import controller.PlayerController;
 import view.add.AddObjects;
 import view.add.AddPlayer;
 import view.overview.Overview;
-import view.ratingSystem.RatingSystem;
 
 /**
  *
