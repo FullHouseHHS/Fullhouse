@@ -17,6 +17,9 @@ import model.Location;
  */
 public class AddObjects extends javax.swing.JPanel {
     ArrayList<Location> locations;
+    
+    private String address, city, host;
+    int min_rating, max_entries;
     /**
      * Creates new form AddObjects
      */
@@ -457,6 +460,9 @@ public class AddObjects extends javax.swing.JPanel {
             jMasterclassInvalidInput.setVisible(true);
             jMasterclassInvalidInput.setForeground(new Color(0, 200, 0));
             jMasterclassInvalidInput.setText("Toegevoegd aan de database!");
+            // submit to database
+            setValuesMasterclass();
+            String addedToDataBase = MasterclassController.addMasterclass(min_rating, max_entries, address, city, host);
             clearMasterclassFields();
         } else {
             jMasterclassInvalidInput.setVisible(true);
@@ -486,9 +492,11 @@ public class AddObjects extends javax.swing.JPanel {
         //Put in jMasterclassPlayers
         
     }
-
-
-
-
-
+    
+    private void setValuesMasterclass(){
+        min_rating = Integer.parseInt(this.jMasterclassMinPoints.getText());
+        max_entries = Integer.parseInt(this.jMasterclassMaxParticipants.getText());
+        //Object tempdata = this.MasterclassLocation.getSelectedItem();
+        address = this.MasterclassLocation.getAddress();
+    }
 }
