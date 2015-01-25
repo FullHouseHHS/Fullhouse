@@ -19,12 +19,20 @@ import model.Player;
  * @author CVD
  */
 public class PlayerController {
+    private static String famous;
+    private static boolean is_famous;
     private static ArrayList<Player> players;
     
     public static String addPlayer(String surname, String lastName, int telephoneNumber,String emailAddress,double rating, boolean is_famous, String address, String zipcode, String city){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
-            Statement stat = conn.createStatement();
+            Statement stat = conn.createStatement();            
+            if(is_famous){
+               famous = "T";
+            }
+            else{
+               famous = "F";
+            }
             
             //player
             String prepStatInsertPlayer = "INSERT INTO player (surname, lastName, telephoneNumber, emailAddress, rating, is_famous, address, zipcode, city) "
@@ -36,7 +44,7 @@ public class PlayerController {
             prepStat.setInt(3, telephoneNumber);
             prepStat.setString(4, emailAddress);
             prepStat.setDouble(5, rating);
-            prepStat.setBoolean(6, is_famous);
+            prepStat.setString(6, famous);
             prepStat.setString(7, address);
             prepStat.setString(8, zipcode);
             prepStat.setString(9, city);
@@ -56,6 +64,13 @@ public class PlayerController {
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
+            
+            if(is_famous){
+               famous = "T";
+            }
+            else{
+               famous = "F";
+            }
             
             String prepStatChangeKlant = "UPDATE player SET surname=?, lastName=?, telephoneNumber=?, emailAddress=?, rating=?, is_famous=?, address=?, zipcode=?, city=? WHERE id = ?";
             
@@ -112,11 +127,13 @@ public class PlayerController {
                 int telephoneNumber = result.getInt("telephoneNumber");
                 String emailAddress = result.getString("emailAddress");
                 double rating = result.getInt("rating");
-                boolean is_famous = result.getBoolean("is_famous");
+                famous = result.getString("is_famous");
                 String address = result.getString("address");
                 String zipcode = result.getString("zipcode");
                 String city = result.getString("city");
     
+                is_famous = famous.equals("T");
+                
                 Player player = new Player(id, surname, lastName, telephoneNumber, emailAddress, rating, is_famous, address, zipcode, city);
                 players.add(player);
             }

@@ -17,8 +17,12 @@ public class AddPlayer extends javax.swing.JPanel {
     private String surname, lastName, address, zipCode, emailAddress, city;
     private final int rating = 250;
     int phoneNumber;
-    
     boolean isFamous;
+    
+    private final int zipcodeNumberLength = 4;
+    private final int zipcodeCharacterLength = 2;
+    private final int addressNumberLength = 2;
+    private final int phoneNumberLength = 10;
     
     /**
      * Creates new form AddPlayer
@@ -226,15 +230,18 @@ public class AddPlayer extends javax.swing.JPanel {
         incorrectInput = InputVerifier.checkLetters(this.jLastName.getText()) ? incorrectInput : true;
 
         //checkAddress
+        incorrectInput = InputVerifier.checkAmountOfCharacters(this.jAddressNumbers.getText(), addressNumberLength ) ? incorrectInput : true;
         incorrectInput = InputVerifier.checkLetters(this.jAddressLetters.getText()) ? incorrectInput : true;
         incorrectInput = InputVerifier.checkNumbers(this.jAddressNumbers.getText()) ? incorrectInput : true;
 
         //checkZip
+        incorrectInput = InputVerifier.checkAmountOfCharacters(this.jZipCodeNumbers.getText(), zipcodeNumberLength ) ? incorrectInput : true;
+        incorrectInput = InputVerifier.checkAmountOfCharacters(this.jZipCodeLetters.getText(), zipcodeNumberLength ) ? incorrectInput : true;
         incorrectInput = InputVerifier.checkNumbers(this.jZipCodeNumbers.getText()) ? incorrectInput : true;
         incorrectInput = InputVerifier.checkLetters(this.jZipCodeLetters.getText()) ? incorrectInput : true;
 
         //checkPhoneNumber
-        incorrectInput = InputVerifier.checkAmountOfNumbers(this.jPhoneNumber.getText()) ? incorrectInput : true;
+        incorrectInput = InputVerifier.checkAmountOfCharacters(this.jPhoneNumber.getText(), phoneNumberLength ) ? incorrectInput : true;
         incorrectInput = InputVerifier.checkNumbers(this.jPhoneNumber.getText()) ? incorrectInput : true;
 
         

@@ -8,7 +8,6 @@ package view.mainPage;
 import view.add.AddObjects;
 import view.add.AddPlayer;
 import view.overview.Overview;
-import view.overview.PlayerOverview;
 
 /**
  *

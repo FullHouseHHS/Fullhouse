@@ -12,23 +12,16 @@ package view.add;
  */
 public final class InputVerifier {
     public static boolean checkNumbers(String input) {
-
         try {
             Integer.parseInt(input);
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
-
     }
-
-    public static boolean checkAmountOfNumbers(String input) {
-            if(input.length() == 10){
-                return true;
-            }
-            else{
-                return false;
-            }
+    
+    public static boolean checkAmountOfCharacters(String input, int length) {
+        return input.length() == length;
     }
     
     public static boolean checkLetters(String input) {
