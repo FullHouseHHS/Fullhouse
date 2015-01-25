@@ -6,6 +6,7 @@
 
 package view.add;
 
+import controller.PlayerController;
 import java.awt.Color;
 
 /**
@@ -13,8 +14,8 @@ import java.awt.Color;
  * @author Nick
  */
 public class AddPlayer extends javax.swing.JPanel {
-    String firstName, lastName, address, zipCode, emailAddress;
-    
+    private String surname, lastName, address, zipCode, emailAddress, city;
+    private final int rating = 250;
     int phoneNumber;
     
     boolean isFamous;
@@ -54,6 +55,8 @@ public class AddPlayer extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jCity = new javax.swing.JTextField();
 
         jButton1.setText("Voeg toe");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -97,6 +100,13 @@ public class AddPlayer extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Speler toevoegen");
 
+        jLabel2.setText("Plaats");
+        jLabel2.setMaximumSize(new java.awt.Dimension(44, 14));
+        jLabel2.setMinimumSize(new java.awt.Dimension(44, 14));
+        jLabel2.setPreferredSize(new java.awt.Dimension(44, 14));
+
+        jCity.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,8 +119,13 @@ public class AddPlayer extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCity, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,14 +135,14 @@ public class AddPlayer extends javax.swing.JPanel {
                         .addComponent(jLastName)
                         .addComponent(jFirstName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jAddressLetters, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                                .addComponent(jZipCodeNumbers, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jAddressLetters, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                                .addComponent(jZipCodeNumbers))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jZipCodeLetters)
                                 .addComponent(jAddressNumbers))))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jInvalidInput, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
@@ -148,15 +163,23 @@ public class AddPlayer extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(161, 161, 161)
-                .addComponent(jLabel7)
-                .addGap(25, 25, 25)
-                .addComponent(jLabel8)
-                .addGap(25, 25, 25)
-                .addComponent(jLabel9)
-                .addGap(25, 25, 25)
-                .addComponent(jLabel10)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(jLabel7)
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel8)
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel9)
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel10)
+                        .addContainerGap(237, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(201, 201, 201))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(186, 186, 186)
@@ -211,8 +234,10 @@ public class AddPlayer extends javax.swing.JPanel {
         incorrectInput = InputVerifier.checkLetters(this.jZipCodeLetters.getText()) ? incorrectInput : true;
 
         //checkPhoneNumber
+        incorrectInput = InputVerifier.checkAmountOfNumbers(this.jPhoneNumber.getText()) ? incorrectInput : true;
         incorrectInput = InputVerifier.checkNumbers(this.jPhoneNumber.getText()) ? incorrectInput : true;
 
+        
         //checkEmail
         incorrectInput = InputVerifier.checkEmail(this.jEmailAddress.getText()) ? incorrectInput : true;
 
@@ -220,10 +245,17 @@ public class AddPlayer extends javax.swing.JPanel {
         if (!incorrectInput){
             setValues();
             //Submit to database
-            this.jInvalidInput.setVisible(true);
-            this.jInvalidInput.setForeground(new Color(0, 155, 50));
-            this.jInvalidInput.setText("Succesvol aan database toegevoegd!");
-            
+            String addedToDatabase = PlayerController.addPlayer(surname, lastName, phoneNumber, emailAddress, rating, isFamous, address, zipCode, city);
+            if(addedToDatabase.contains("fout")){
+                this.jInvalidInput.setVisible(true);
+                this.jInvalidInput.setForeground(Color.RED);
+                this.jInvalidInput.setText(addedToDatabase);
+            }
+            else{
+                this.jInvalidInput.setVisible(true);
+                this.jInvalidInput.setForeground(new Color(0, 155, 50));
+                this.jInvalidInput.setText(addedToDatabase);
+            }
         } else {
             //Something wrong has been entered
             this.jInvalidInput.setVisible(true);
@@ -245,12 +277,14 @@ public class AddPlayer extends javax.swing.JPanel {
     private javax.swing.JTextField jAddressLetters;
     private javax.swing.JTextField jAddressNumbers;
     private javax.swing.JButton jButton1;
+    private javax.swing.JTextField jCity;
     private javax.swing.JTextField jEmailAddress;
     private javax.swing.JTextField jFirstName;
     private javax.swing.JLabel jInvalidInput;
     private javax.swing.JCheckBox jKnownPlayer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -264,10 +298,11 @@ public class AddPlayer extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void setValues() {
-        firstName = this.jFirstName.getText();
+        surname = this.jFirstName.getText();
         lastName = this.jLastName.getText();
         address = this.jAddressLetters.getText() + " " + this.jAddressNumbers.getText();
         zipCode = this.jZipCodeNumbers.getText() + " " + this.jZipCodeLetters.getText();
+        city = this.jCity.getText();
         phoneNumber = Integer.parseInt(this.jPhoneNumber.getText());
         emailAddress = this.jEmailAddress.getText();
     }

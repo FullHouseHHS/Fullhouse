@@ -6,7 +6,8 @@ package model;
  */
 public class Player {
     private int id;
-    private String name;
+    private String surname;
+    private String lastName;
     private String emailAddress;
     
     private int telephoneNumber;
@@ -17,8 +18,9 @@ public class Player {
     private String city;
     private String zipCode;
     
-    public Player(int id, String name, int telephoneNumber,String emailAddress, double rating, boolean is_famous, String adress, String city, String zipCode) {
-        this.name = name;
+    public Player(int id, String surname, String lastName, int telephoneNumber,String emailAddress, double rating, boolean is_famous, String adress, String city, String zipCode) {
+        this.surname = surname;
+        this.lastName = lastName;
         this.emailAddress = emailAddress;
         this.telephoneNumber = telephoneNumber;
         this.rating = rating;
@@ -36,14 +38,6 @@ public class Player {
 
     public void setIs_famous(boolean is_famous) {
         this.is_famous = is_famous;
-    }
-        
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmailAddress() {
@@ -93,11 +87,27 @@ public class Player {
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
     
     
     @Override
     public String toString(){
-        return "" + name + "   " + rating + "   " + adress + "   " + city + "   " +  zipCode + "   " + telephoneNumber + "   " + emailAddress;    
+        return "" + surname + " " + lastName + "   " + rating + "   " + adress + "   " + city + "   " +  zipCode + "   " + telephoneNumber + "   " + emailAddress;    
     }
     
     public String[] getInfo() {

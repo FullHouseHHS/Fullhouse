@@ -21,53 +21,56 @@ import model.Player;
 public class PlayerController {
     private static ArrayList<Player> players;
     
-    public static void addPlayer(String name,int telephoneNumber,String emailAdress,double rating, boolean is_famous, String address, String zipcode, String city){
+    public static String addPlayer(String surname, String lastName, int telephoneNumber,String emailAddress,double rating, boolean is_famous, String address, String zipcode, String city){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
             //player
-            String prepStatInsertPlayer = "INSERT INTO player (name, telephoneNumber, emailAdress, rating, is_famous, address, zipcode, city) "
-                                                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String prepStatInsertPlayer = "INSERT INTO player (surname, lastName, telephoneNumber, emailAddress, rating, is_famous, address, zipcode, city) "
+                                                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement prepStat =  conn.prepareStatement(prepStatInsertPlayer);
             
-            prepStat.setString(1, name);
-            prepStat.setInt(2, telephoneNumber);
-            prepStat.setString(3, emailAdress);
-            prepStat.setDouble(4, rating);
-            prepStat.setBoolean(5, is_famous);
-            prepStat.setString(6, address);
-            prepStat.setString(7, zipcode);
-            prepStat.setString(8, city);
+            prepStat.setString(1, surname);
+            prepStat.setString(2, lastName);
+            prepStat.setInt(3, telephoneNumber);
+            prepStat.setString(4, emailAddress);
+            prepStat.setDouble(5, rating);
+            prepStat.setBoolean(6, is_famous);
+            prepStat.setString(7, address);
+            prepStat.setString(8, zipcode);
+            prepStat.setString(9, city);
             
             System.out.println(prepStat);
             prepStat.executeUpdate();
-            
             stat.close();
+            return "Succesvol aan database toegevoegd!";
         }
         catch (SQLException exc) {
-            System.err.println("Sql fout bij het toevoegen van de speler: " + exc.toString());
+            System.out.println("Sql fout bij het toevoegen van de speler: " + exc.toString());
+            return "Sql fout bij het toevoegen van de speler.";
         }
     }
     
-    public static void updatePlayer(String name, int telephoneNumber, String emailAdress, double rating, boolean is_famous, String address, String zipcode, String city, Player player){
+    public static void updatePlayer(String surname, String lastName, int telephoneNumber, String emailAddress, double rating, boolean is_famous, String address, String zipcode, String city, Player player){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
-            String prepStatChangeKlant = "UPDATE player SET name=?, telephoneNumber=?, emailAdress=?, rating=?, is_famous=?, address=?, zipcode=?, city=? WHERE id = ?";
+            String prepStatChangeKlant = "UPDATE player SET surname=?, lastName=?, telephoneNumber=?, emailAddress=?, rating=?, is_famous=?, address=?, zipcode=?, city=? WHERE id = ?";
             
             PreparedStatement prepStat =  conn.prepareStatement(prepStatChangeKlant);
             
-            prepStat.setString(1, name);
-            prepStat.setInt(2, telephoneNumber);
-            prepStat.setString(3, emailAdress);
-            prepStat.setDouble(4, rating);
-            prepStat.setBoolean(5, is_famous);
-            prepStat.setString(6, address);
-            prepStat.setString(7, zipcode);
-            prepStat.setString(8, city);
-            prepStat.setInt(9, player.getId());
+            prepStat.setString(1, surname);
+            prepStat.setString(2, lastName);
+            prepStat.setInt(3, telephoneNumber);
+            prepStat.setString(4, emailAddress);
+            prepStat.setDouble(5, rating);
+            prepStat.setBoolean(6, is_famous);
+            prepStat.setString(7, address);
+            prepStat.setString(8, zipcode);
+            prepStat.setString(9, city);
+            prepStat.setInt(10, player.getId());
             
             System.out.println(prepStat);
             prepStat.executeUpdate();
@@ -104,16 +107,17 @@ public class PlayerController {
             
             while (result.next()) {
                 int id = result.getInt("id");
-                String name = result.getString("name");
+                String surname = result.getString("surname");
+                String lastName = result.getString("lastName");
                 int telephoneNumber = result.getInt("telephoneNumber");
-                String emailAdress = result.getString("emailAdress");
+                String emailAddress = result.getString("emailAddress");
                 double rating = result.getInt("rating");
                 boolean is_famous = result.getBoolean("is_famous");
                 String address = result.getString("address");
                 String zipcode = result.getString("zipcode");
                 String city = result.getString("city");
     
-                Player player = new Player(id, name, telephoneNumber, emailAdress, rating, is_famous, address, zipcode, city);
+                Player player = new Player(id, surname, lastName, telephoneNumber, emailAddress, rating, is_famous, address, zipcode, city);
                 players.add(player);
             }
 

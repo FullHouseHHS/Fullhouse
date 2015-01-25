@@ -22,6 +22,15 @@ public final class InputVerifier {
 
     }
 
+    public static boolean checkAmountOfNumbers(String input) {
+            if(input.length() == 10){
+                return true;
+            }
+            else{
+                return false;
+            }
+    }
+    
     public static boolean checkLetters(String input) {
         return input.matches("[a-zA-Z]+");
     }
