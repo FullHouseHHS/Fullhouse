@@ -98,6 +98,29 @@ public class PlayerController {
         }
     }
     
+    public static String updateRating(double rating) {
+        try{
+            Connection conn = DataBaseConnector.getConnection(); 
+            Statement stat = conn.createStatement();
+            
+            
+            String prepStatChangeRating = "UPDATE player SET rating=? WHERE id = ?";
+            
+            PreparedStatement prepStat =  conn.prepareStatement(prepStatChangeRating);
+            
+            prepStat.setDouble(1, rating);
+            
+            System.out.println(prepStat);
+            prepStat.executeUpdate();
+            stat.close();
+            return "Succesvol de Rating gewijzigd!";
+        }
+            catch (SQLException exc) {
+            System.err.println("Sql fout bij het wijzigen van de Rating: " + exc.toString());
+            return "Sql fout bij het wijzigen van de Rating.";
+        }   
+    }
+    
     public static String deletePlayer(Player player){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
