@@ -1,8 +1,11 @@
-package utilities;
+package view.RatingSystem;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Comparator;
+import javax.swing.table.TableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.Player;
 import utilities.databaseUtil.DataBaseConnector;
 
@@ -16,14 +19,18 @@ double sc = 0;
 double scw = 0;
 Player winner;
 Player loser;
+Player player;
 private ArrayList<Player> players = new ArrayList();
 String[] columns = {"id", "rating"};
+
 DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
 
     
     public RatingSystem() {
         initComponents();
-        fillPlayerList();
+        initSorter();
+        getPlayers();
+        //fillPlayerList();
     }
 
     public void fillPlayerList(){
@@ -34,13 +41,17 @@ DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
             
             while(result.next()){
                 int id = result.getInt("id");
-                String name = result.getString("name");
+                String surname = result.getString("surname");
+                String lastName = result.getString("lastName");
                 String emailAdress = result.getString("emailAdress");
                 int telephoneNumber = result.getInt("telephoneNumber");
                 double rating = result.getDouble("rating");
-                boolean is_famous = result.getBoolean("is_famous");
+                String is_famous = result.getString("is_famous");
+                String address = result.getString("address");
+                String city = result.getString("city");
+                String zipCode = result.getString("zipCode");
 
-                Player player = new Player(name, telephoneNumber, emailAdress, rating, is_famous, PlayerAddress playerAddress);
+                Player player = new Player(id, surname, lastName, telephoneNumber, emailAdress, rating, is_famous, address, city, zipCode );
                 players.add(player);
                 
                 modelPlayer.addRow(player.getInfo());
@@ -65,6 +76,44 @@ DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
         player.setRating(player.getRating() - sc);
         modelPlayer.setValueAt(player.getRating(), selectedIndexL, 1);
         //modelPlayer.removeRow(selectedIndexL);
+    }
+    
+    private void initSorter() {
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(TPlayer.getModel());
+        TPlayer.setRowSorter(sorter);
+        
+        Comparator<String> comparator = new Comparator<String>() {
+
+            public int compare(String o1, String o2) {
+                return 0;
+            }
+        };
+    }
+    
+    private void getPlayers() {
+        try {
+            
+            Connection conn = DataBaseConnector.getConnection();
+        
+            Statement stat = conn.createStatement();
+            
+            ResultSet result = stat.executeQuery("SELECT * FROM PLAYERS");
+            
+            while(result.next()){
+                result.getString("name");
+                result.getString("name");
+                result.getString("name");
+                result.getString("name");
+                result.getString("name");
+                
+                
+                System.out.println(result.getString("name"));
+                
+            }
+            
+        } catch (SQLException e){
+            
+        }
     }
     
     @SuppressWarnings("unchecked")
@@ -201,12 +250,12 @@ DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
         scw = 0;
     }//GEN-LAST:event_btSetWinnerActionPerformed
 
-    public static void main(String args[]) {
+   public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html */
+         
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -231,8 +280,7 @@ DefaultTableModel modelPlayer = new DefaultTableModel(columns, 0);
                 new RatingSystem().setVisible(true);
             }
         });
-    }
-
+    } 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TPlayer;
     private javax.swing.JButton btPickLoser;

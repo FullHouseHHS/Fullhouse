@@ -13,12 +13,12 @@ public class Player {
     private int telephoneNumber;
     private double rating;
     
-    private boolean is_famous;
+    private String is_famous;
     private String adress;
     private String city;
     private String zipCode;
     
-    public Player(int id, String surname, String lastName, int telephoneNumber,String emailAddress, double rating, boolean is_famous, String adress, String city, String zipCode) {
+    public Player(int id, String surname, String lastName, int telephoneNumber,String emailAddress, double rating, String is_famous, String adress, String city, String zipCode) {
         this.surname = surname;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
@@ -32,11 +32,11 @@ public class Player {
         return id;
     }
 
-    public boolean isIs_famous() {
+    public String isIs_famous() {
         return is_famous;
     }
 
-    public void setIs_famous(boolean is_famous) {
+    public void setIs_famous(String is_famous) {
         this.is_famous = is_famous;
     }
 
