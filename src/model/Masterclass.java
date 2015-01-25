@@ -11,22 +11,17 @@ package model;
  */
 public class Masterclass {
     private int m_id;
-    private int minRating;
-    private int maxParticipants;
-    Player lecturer;
-    
-<<<<<<< HEAD
-    ArrayList<Player> playerList;
-    
-    public Masterclass(Player lecturer,int m_id, int maxParticipants, int minRating, ArrayList<Player> playerList){
-=======
-    public Masterclass(int m_id, Player lecturer, int maxParticipants, int minRating){
+    private double minRating;
+    private int maxEntries;
+    Player host;
+    Location location;
+
+    public Masterclass(int m_id, Player host, int maxEntries, double minRating, Location location){
         this.m_id = m_id;
->>>>>>> origin/master
-        this.lecturer = lecturer;
-        this.m_id = m_id;
-        this.maxParticipants = maxParticipants;
+        this.host = host;
+        this.maxEntries = maxEntries;
         this.minRating = minRating;
+        this.location = location;
     }
 
     public int getM_id() {
@@ -41,32 +36,32 @@ public class Masterclass {
         return m_id;
     }
 
-    public int getMinRating() {
+    public double getMinRating() {
         return minRating;
     }
 
-    public void setMinRating(int minRating) {
+    public void setMinRating(double minRating) {
         this.minRating = minRating;
     }
 
     public int getMaxParticipants() {
-        return maxParticipants;
+        return maxEntries;
     }
 
     public void setMaxParticipants(int maxParticipants) {
-        this.maxParticipants = maxParticipants;
+        this.maxEntries = maxParticipants;
     }
 
-    public Player getLecturer() {
-        return lecturer;
+    public Player getHost() {
+        return host;
     }
 
-    public void setLecturer(Player lecturer) {
-        this.lecturer = lecturer;
+    public void setHost(Player host) {
+        this.host = host;
     }
-
+    
     @Override
     public String toString(){
-        return "" + m_id + "   " + lecturer + "   " + minRating + "   " + maxParticipants + "   ";
+        return "" + m_id + "   " + host + "   " + minRating + "   " + maxEntries + "   ";
     }
 }
