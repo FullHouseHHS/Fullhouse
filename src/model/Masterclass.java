@@ -5,24 +5,29 @@
  */
 package model;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author CVD
  */
 public class Masterclass {
+    private int m_id;
     private int minRating;
     private int maxParticipants;
     Player lecturer;
     
-    ArrayList<Player> playerList;
-    
-    public Masterclass(Player lecturer, int maxParticipants, int minRating, ArrayList<Player> playerList){
+    public Masterclass(int m_id, Player lecturer, int maxParticipants, int minRating){
+        this.m_id = m_id;
         this.lecturer = lecturer;
         this.maxParticipants = maxParticipants;
         this.minRating = minRating;
-        this.playerList = playerList;
+    }
+
+    public int getM_id() {
+        return m_id;
+    }
+
+    public void setM_id(int m_id) {
+        this.m_id = m_id;
     }
 
     public int getMinRating() {
@@ -49,12 +54,8 @@ public class Masterclass {
         this.lecturer = lecturer;
     }
 
-    public ArrayList<Player> getPlayerList() {
-        return playerList;
+    @Override
+    public String toString(){
+        return "" + m_id + "   " + lecturer + "   " + minRating + "   " + maxParticipants + "   ";
     }
-
-    public void setPlayerList(ArrayList<Player> playerList) {
-        this.playerList = playerList;
-    }
-    
 }

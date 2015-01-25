@@ -11,12 +11,12 @@ package model;
  */
 public class Location {
     
-    private String adress;
+    private String address;
     private String location;
     private int maxTables;
     
-    public Location(String adress, String location, int maxTables) {
-        this.adress = adress;
+    public Location(String address, String location, int maxTables) {
+        this.address = address;
         this.location = location;
         this.maxTables = maxTables;
     }
@@ -29,12 +29,12 @@ public class Location {
         this.location = location;
     }
     
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getMaxTables() {
@@ -47,6 +47,6 @@ public class Location {
     
     @Override
     public String toString(){
-        return "" + location + "   " + adress + "   " + maxTables + "   ";  
+        return "" + location + "   " + address + "   " + maxTables + "   ";  
     }
 }
