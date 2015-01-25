@@ -6,7 +6,7 @@ package model;
  */
 public class Player {
     private int id;
-    private String surname;
+    private String firstName;
     private String lastName;
     private String emailAddress;
     
@@ -14,18 +14,21 @@ public class Player {
     private double rating;
     
     private boolean is_famous;
-    private String adress;
+    private String address;
     private String city;
     private String zipCode;
     
-    public Player(int id, String surname, String lastName, int telephoneNumber,String emailAddress, double rating, boolean is_famous, String adress, String city, String zipCode) {
-        this.surname = surname;
+    public Player(int id, String firstName, String lastName, int telephoneNumber,String emailAddress, double rating, boolean is_famous, String address, String city, String zipCode) {
+        this.id = id;
+        this.firstName = firstName;
         this.lastName = lastName;
-        this.emailAddress = emailAddress;
         this.telephoneNumber = telephoneNumber;
+        this.emailAddress = emailAddress;
         this.rating = rating;
         this.is_famous = is_famous;
-
+        this.address = address;
+        this.zipCode = zipCode;
+        this.city = city;
     }
 
     public int getId() {
@@ -64,12 +67,12 @@ public class Player {
         this.rating = rating;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
     
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
     
     public String getCity() {
@@ -88,12 +91,12 @@ public class Player {
         this.zipCode = zipCode;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -107,10 +110,11 @@ public class Player {
     
     @Override
     public String toString(){
-        return "" + surname + " " + lastName + "   " + rating + "   " + adress + "   " + city + "   " +  zipCode + "   " + telephoneNumber + "   " + emailAddress;    
+        return "" + firstName + " " + lastName + "   " + address + "   " + city + "   " +  zipCode  + "   " +  telephoneNumber + "   " + emailAddress + "   " + is_famous;    
     }
     
-    public String[] getInfo() {
-        return new String[]{"" + rating};
+    public String[] getInfo(){
+        return new String[]{this.firstName, this.lastName, Double.toString(this.rating), this.address, this.city, Integer.toString(this.telephoneNumber), this.emailAddress, Boolean.toString(this.is_famous)};
     }
+    
 }

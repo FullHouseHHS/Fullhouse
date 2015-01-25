@@ -5,6 +5,7 @@
  */
 package view.mainPage;
 
+import controller.PlayerController;
 import view.add.AddObjects;
 import view.add.AddPlayer;
 import view.overview.Overview;
@@ -22,7 +23,7 @@ public class FullHouseGUI extends javax.swing.JFrame {
     
     public FullHouseGUI() {
         initComponents();
-        initTabs();
+        initData();
     }
 
     /**
@@ -103,5 +104,12 @@ public class FullHouseGUI extends javax.swing.JFrame {
         this.jTabbedPane.add("Toevoegen", new AddObjects());
         this.jTabbedPane.add("Speler toevoegen", new AddPlayer());
         //this.jTabbedPane.add("Rating System", new RatingSystem());
+    }
+
+    private void initData() {
+        String sqlStatus = PlayerController.getAllPlayers();
+        if(sqlStatus.contains("Succes")){
+            initTabs();           
+        }
     }
 }

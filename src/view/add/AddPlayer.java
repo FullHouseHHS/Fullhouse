@@ -16,7 +16,7 @@ import javax.swing.JTextField;
  */
 public class AddPlayer extends javax.swing.JPanel {
 
-    private String surname, lastName, address, zipCode, emailAddress, city;
+    private String firstName, lastName, address, zipCode, emailAddress, city;
     private final int rating = 250;
     int phoneNumber;
     boolean isFamous;
@@ -285,6 +285,7 @@ public class AddPlayer extends javax.swing.JPanel {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 
         boolean incorrectInput = false;
+        hideLabels();
 
         /* //checkName
          incorrectInput = InputVerifier.checkLetters(this.jFirstName.getText()) ? incorrectInput : true;
@@ -316,46 +317,43 @@ public class AddPlayer extends javax.swing.JPanel {
         
         //First name
         textBools[0] = InputVerifier.checkLetters(stringFields[0]);
-        textBools[0] = InputVerifier.checkAmountOfCharacters(stringFields[0], 2, 25);
-        if (!textBools[0]) errorLabels[0].setVisible(true);
+        textBools[0] = InputVerifier.checkAmountOfCharacters(stringFields[0], 2, 20);
+        if (!textBools[0]) errorLabels[0].setVisible(true);incorrectInput = true;
         //Last name
         textBools[1] = InputVerifier.checkLetters(stringFields[1]);
-        textBools[1] = InputVerifier.checkAmountOfCharacters(stringFields[1], 2, 25);
-        if (!textBools[1]) errorLabels[1].setVisible(true);
+        textBools[1] = InputVerifier.checkAmountOfCharacters(stringFields[1], 2, 40);
+        if (!textBools[1]) errorLabels[1].setVisible(true);incorrectInput = true;
         //Address
         textBools[2] = InputVerifier.checkNumbers(stringFields[2]);
-        textBools[2] = InputVerifier.checkAmountOfCharacters(stringFields[2], 2, 25);
+        textBools[2] = InputVerifier.checkAmountOfCharacters(stringFields[2], 2, 6);
         textBools[3] = InputVerifier.checkLetters(stringFields[3]);
-        textBools[3] = InputVerifier.checkAmountOfCharacters(stringFields[3], 2, 25);
-        if (!textBools[2]) errorLabels[2].setVisible(true);
+        textBools[3] = InputVerifier.checkAmountOfCharacters(stringFields[3], 2, 29);
+        if (!textBools[2]) errorLabels[2].setVisible(true);incorrectInput = true;
 
         //Zipcode
         textBools[4] = InputVerifier.checkNumbers(stringFields[4]);
         textBools[4] = InputVerifier.checkAmountOfCharacters(stringFields[4], 4, 4);
         textBools[5] = InputVerifier.checkLetters(stringFields[5]);
         textBools[5] = InputVerifier.checkAmountOfCharacters(stringFields[5], 2, 2);
-        if (!textBools[3]) errorLabels[3].setVisible(true);
+        if (!textBools[3]) errorLabels[3].setVisible(true);incorrectInput = true;
         //City
         textBools[6] = InputVerifier.checkLetters(stringFields[6]);
-        textBools[6] = InputVerifier.checkAmountOfCharacters(stringFields[6], 2, 25);
-        if (!textBools[4]) errorLabels[4].setVisible(true);
+        textBools[6] = InputVerifier.checkAmountOfCharacters(stringFields[6], 2, 20);
+        if (!textBools[4]) errorLabels[4].setVisible(true);incorrectInput = true;
         //Phone
         textBools[7] = InputVerifier.checkNumbers(stringFields[7]);
         textBools[7] = InputVerifier.checkAmountOfCharacters(stringFields[7], 10, 10);
-        if (!textBools[5]) errorLabels[5].setVisible(true);
+        if (!textBools[5]) errorLabels[5].setVisible(true);incorrectInput = true;
         //Email
         textBools[8] = InputVerifier.checkEmail(stringFields[8]);
-        textBools[8] = InputVerifier.checkAmountOfCharacters(stringFields[8], 6, 254);
-        if (!textBools[6]) errorLabels[6].setVisible(true);
-        
- 
-        
+        textBools[8] = InputVerifier.checkAmountOfCharacters(stringFields[8], 6, 60);
+        if (!textBools[6]) errorLabels[6].setVisible(true);incorrectInput = true;
         
         //checkInput
         if (!incorrectInput) {
             setValues();
             //Submit to database
-            String addedToDatabase = PlayerController.addPlayer(surname, lastName, phoneNumber, emailAddress, rating, isFamous, address, zipCode, city);
+            String addedToDatabase = PlayerController.addPlayer(firstName, lastName, phoneNumber, emailAddress, rating, isFamous, address, zipCode, city);
             if (addedToDatabase.contains("fout")) {
                 this.jInvalidInput.setVisible(true);
                 this.jInvalidInput.setForeground(Color.RED);
@@ -414,7 +412,7 @@ public class AddPlayer extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void setValues() {
-        surname = this.jFirstName.getText();
+        firstName = this.jFirstName.getText();
         lastName = this.jLastName.getText();
         address = this.jAddressLetters.getText() + " " + this.jAddressNumbers.getText();
         zipCode = this.jZipCodeNumbers.getText() + " " + this.jZipCodeLetters.getText();

@@ -5,15 +5,13 @@
  */
 package view.overview;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import controller.PlayerController;
+import java.util.ArrayList;
 import java.util.Comparator;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.Player;
-import utilities.databaseUtil.DataBaseConnector;
 
 /**
  *
@@ -21,16 +19,18 @@ import utilities.databaseUtil.DataBaseConnector;
  */
 public class PlayerOverview extends javax.swing.JPanel {
 
-    
-    Player player;
+    DefaultTableModel tableModel;
+    private ArrayList<Player> players;
+    private ArrayList<Player> searchedPlayers = new ArrayList();
     
     /**
      * Creates new form PlayerOverview
      */
     public PlayerOverview() {
+        this.players = PlayerController.getPlayers();
         initComponents();
+        fillTable();
         initSorter();
-        getPlayers();
     }
 
     /**
@@ -45,17 +45,18 @@ public class PlayerOverview extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jPlayerTable = new javax.swing.JTable();
         jSearchPlayer = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         jPlayerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Naam", "Tel.", "E-mail", "Rating", "Is bekend", "Adres", "Postcode", "Stad"
+                "Voornaam", "Achternaam", "Tel.", "E-mail", "Rating", "Is bekend", "Adres", "Postcode", "Woonplaats"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -65,7 +66,14 @@ public class PlayerOverview extends javax.swing.JPanel {
         jPlayerTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jPlayerTable);
 
-        jSearchPlayer.setText("Zoek een speler..");
+        jSearchPlayer.setToolTipText("Zoek een speler..");
+        jSearchPlayer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jSearchPlayerKeyReleased(evt);
+            }
+        });
+
+        jLabel1.setText("Zoek een speler:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -77,6 +85,8 @@ public class PlayerOverview extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSearchPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -84,20 +94,57 @@ public class PlayerOverview extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSearchPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSearchPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jSearchPlayerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jSearchPlayerKeyReleased
+        searchedPlayers.clear();
+        tableModel.setRowCount(0);
+        tableModel.fireTableDataChanged();
+        if(jSearchPlayer.getText() != null){
+            tableModel.setRowCount(0);
+            tableModel.fireTableDataChanged();
+            for(Player player : players){
+                if(player.toString().contains(jSearchPlayer.getText())) {
+                    searchedPlayers.add(player);
+                }
+            }
+            for(Player player : searchedPlayers){
+                tableModel.addRow(player.getInfo());
+            }
+            this.jPlayerTable.setModel(tableModel);
+        }
+        else{
+            searchedPlayers.clear();
+            tableModel.setRowCount(0);
+            tableModel.fireTableDataChanged();
+            fillTable();
+        }
+    }//GEN-LAST:event_jSearchPlayerKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JTable jPlayerTable;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jSearchPlayer;
     // End of variables declaration//GEN-END:variables
 
+    private void fillTable() {
+        String[] columns = {"Voornaam", "Achternaam", "Adres", "Woonplaats", "Postcode", "Telefoonnummer", "Emailadres", "Bekend"};
+        tableModel = new DefaultTableModel(columns, 0);   
+        for(Player player : players){
+            tableModel.addRow(player.getInfo());
+        }
+        this.jPlayerTable.setModel(tableModel);
+    }
+    
     private void initSorter() {
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(jPlayerTable.getModel());
         jPlayerTable.setRowSorter(sorter);
@@ -109,30 +156,6 @@ public class PlayerOverview extends javax.swing.JPanel {
             }
         };
     }
-
-    private void getPlayers() {
-        try {
-            
-            Connection conn = DataBaseConnector.getConnection();
-        
-            Statement stat = conn.createStatement();
-            
-            ResultSet result = stat.executeQuery("SELECT * FROM PLAYERS");
-            
-            while(result.next()){
-                result.getString("name");
-                result.getString("name");
-                result.getString("name");
-                result.getString("name");
-                result.getString("name");
-                
-                
-                System.out.println(result.getString("name"));
-                
-            }
-            
-        } catch (SQLException e){
-            
-        }
-    }
+    
+    
 }
