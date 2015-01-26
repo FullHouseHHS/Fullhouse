@@ -5,7 +5,12 @@
  */
 package model;
 
+<<<<<<< HEAD
 import java.util.Date;
+=======
+import java.util.ArrayList;
+
+>>>>>>> origin/master
 
 /**
  *
