@@ -21,7 +21,7 @@ import model.Masterclass;
 public class MasterclassController {
     private static ArrayList<Masterclass> masterclasses;
     
-    public static void addMasterclass(int min_rating, int max_entries, String address, String city, String host){
+    public static String addMasterclass(int min_rating, int max_entries, String address, String city, String host){
         try {
             Connection conn = DataBaseConnector.getConnection();
             Statement stat = conn.createStatement();

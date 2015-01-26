@@ -6,10 +6,12 @@
 package view.add;
 
 import controller.LocationController;
+import controller.MasterclassController;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import model.Location;
+import model.Player;
 
 /**
  *
@@ -461,8 +463,17 @@ public class AddObjects extends javax.swing.JPanel {
             jMasterclassInvalidInput.setForeground(new Color(0, 200, 0));
             jMasterclassInvalidInput.setText("Toegevoegd aan de database!");
             // submit to database
-            setValuesMasterclass();
+            //setValuesMasterclass();
             String addedToDataBase = MasterclassController.addMasterclass(min_rating, max_entries, address, city, host);
+            if(addedToDataBase.contains("fout")){
+                this.jMasterclassInvalidInput.setVisible(true);
+                this.jMasterclassInvalidInput.setForeground(Color.RED);
+                this.jMasterclassInvalidInput.setText(addedToDataBase);
+            } else {
+                this.jMasterclassInvalidInput.setVisible(true);
+                this.jMasterclassInvalidInput.setForeground(new Color(0, 155, 50));
+                this.jMasterclassInvalidInput.setText(addedToDataBase);
+            }
             clearMasterclassFields();
         } else {
             jMasterclassInvalidInput.setVisible(true);
@@ -470,7 +481,7 @@ public class AddObjects extends javax.swing.JPanel {
             jMasterclassInvalidInput.setText("Bepaalde velden hebben geen correcte input.");
         }
     }
-    
+    //jMasterclassInvalidInput
     private void clearTournamentFields() {
         this.jTournamentMaxParticipants.setText("");
         this.jTournamentTables.setText("");
@@ -496,7 +507,8 @@ public class AddObjects extends javax.swing.JPanel {
     private void setValuesMasterclass(){
         min_rating = Integer.parseInt(this.jMasterclassMinPoints.getText());
         max_entries = Integer.parseInt(this.jMasterclassMaxParticipants.getText());
-        //Object tempdata = this.MasterclassLocation.getSelectedItem();
-        address = this.MasterclassLocation.getAddress();
+        address = Location.getAdress(this.MasterclassLocation.getSelectedItem());
+        city = Location.getCity(this.MasterclassLocation.getSelectedItem());
+        host = Player.getId(this.jMasterclassPlayers.getSelectedItem());
     }
 }

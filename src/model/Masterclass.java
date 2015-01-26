@@ -15,14 +15,14 @@ public class Masterclass {
     private int maxParticipants;
     Player lecturer;
     
-<<<<<<< HEAD
+
     ArrayList<Player> playerList;
     
     public Masterclass(Player lecturer,int m_id, int maxParticipants, int minRating, ArrayList<Player> playerList){
-=======
+
     public Masterclass(int m_id, Player lecturer, int maxParticipants, int minRating){
         this.m_id = m_id;
->>>>>>> origin/master
+
         this.lecturer = lecturer;
         this.m_id = m_id;
         this.maxParticipants = maxParticipants;

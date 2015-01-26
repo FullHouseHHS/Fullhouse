@@ -137,7 +137,7 @@ public class PlayerOverview extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void fillTable() {
-        String[] columns = {"Voornaam", "Achternaam", "Adres", "Woonplaats", "Postcode", "Telefoonnummer", "Emailadres", "Bekend"};
+        String[] columns = {"Voornaam", "Achternaam", "Rating", "Woonplaats", "Postcode", "Telefoonnummer", "Emailadres", "Bekend"};
         tableModel = new DefaultTableModel(columns, 0);   
         for(Player player : players){
             tableModel.addRow(player.getInfo());
