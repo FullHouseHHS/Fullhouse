@@ -72,9 +72,9 @@ public class PlayerController {
                famous = "F";
             }
             
-            String prepStatChangeKlant = "UPDATE player SET surname=?, lastname=?, telephonenumber=?, emailaddress=?, rating=?, is_famous=?, address=?, zipcode=?, city=? WHERE id = ?";
+            String prepStatUpdatePlayer = "UPDATE player SET surname=?, lastname=?, telephonenumber=?, emailaddress=?, rating=?, is_famous=?, address=?, zipcode=?, city=? WHERE id = ?";
             
-            PreparedStatement prepStat =  conn.prepareStatement(prepStatChangeKlant);
+            PreparedStatement prepStat =  conn.prepareStatement(prepStatUpdatePlayer);
             
             prepStat.setString(1, firstName);
             prepStat.setString(2, lastName);
@@ -98,13 +98,36 @@ public class PlayerController {
         }
     }
     
+    public static String updateRating(double rating) {
+        try{
+            Connection conn = DataBaseConnector.getConnection(); 
+            Statement stat = conn.createStatement();
+            
+            
+            String prepStatChangeRating = "UPDATE player SET rating=? WHERE id = ?";
+            
+            PreparedStatement prepStat =  conn.prepareStatement(prepStatChangeRating);
+            
+            prepStat.setDouble(1, rating);
+            
+            System.out.println(prepStat);
+            prepStat.executeUpdate();
+            stat.close();
+            return "Succesvol de Rating gewijzigd!";
+        }
+            catch (SQLException exc) {
+            System.err.println("Sql fout bij het wijzigen van de Rating: " + exc.toString());
+            return "Sql fout bij het wijzigen van de Rating.";
+        }   
+    }
+    
     public static String deletePlayer(Player player){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
-            String prepStatDeleteKlant = "DELETE FROM player WHERE id = ?";
-            PreparedStatement prepStat =  conn.prepareStatement(prepStatDeleteKlant);
+            String prepStatDeletePlayer = "DELETE FROM player WHERE id = ?";
+            PreparedStatement prepStat =  conn.prepareStatement(prepStatDeletePlayer);
             
             prepStat.setInt(1, player.getId());
             
@@ -115,6 +138,26 @@ public class PlayerController {
         catch (SQLException exc) {
             System.err.println("Sql fout bij het verwijderen van de speler: " + exc.toString());
             return "Sql fout bij het verwijderen van de speler.";
+        }
+    }
+    
+    public static String getPlayerById(int id){
+        try {
+            Connection conn = DataBaseConnector.getConnection(); 
+            Statement stat = conn.createStatement();
+            
+            String prepStatGetPlayerById = "SELECT * FROM player WHERE id = ?";
+            PreparedStatement prepStat =  conn.prepareStatement(prepStatGetPlayerById);
+            
+            prepStat.setInt(1, id);
+            
+            prepStat.executeUpdate();
+            stat.close();
+            return "Succesvol de speler opgehaald!";
+        }
+        catch (SQLException exc) {
+            System.err.println("Sql fout bij het ophalen van de speler: " + exc.toString());
+            return "Sql fout bij het ophalen van de speler.";
         }
     }
     

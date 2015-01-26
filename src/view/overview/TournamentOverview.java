@@ -5,7 +5,13 @@
  */
 package view.overview;
 
-import javax.swing.JTable;
+import controller.TournamentController;
+import java.util.ArrayList;
+import java.util.Comparator;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import model.Tournament;
 
 /**
  *
@@ -14,11 +20,18 @@ import javax.swing.JTable;
 public class TournamentOverview extends javax.swing.JPanel {
 
     /**
-     * Creates new form PlayerOverview
+     * Creates new form TournamentOverview
      */
+    DefaultTableModel tableModel;
+    private ArrayList<Tournament> tournaments;
+    private ArrayList<Tournament> searchedTournaments;
+    
     public TournamentOverview() {
+        this.tournaments = TournamentController.getTournaments();
         initComponents();
         initTable();
+        fillTable();
+        initSorter();
     }
 
     /**
@@ -33,6 +46,7 @@ public class TournamentOverview extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTournamentTable = new javax.swing.JTable();
         jSearchTournament = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         jTournamentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -56,7 +70,14 @@ public class TournamentOverview extends javax.swing.JPanel {
         jTournamentTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTournamentTable);
 
-        jSearchTournament.setText("Zoek een toernooi..");
+        jSearchTournament.setToolTipText("Zoek een toernooi..");
+        jSearchTournament.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSearchTournamentActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Zoek een toernooi:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -68,6 +89,8 @@ public class TournamentOverview extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addGap(28, 28, 28)
                         .addComponent(jSearchTournament, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -75,15 +98,43 @@ public class TournamentOverview extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSearchTournament, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSearchTournament, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 585, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jSearchTournamentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchTournamentActionPerformed
+        searchedTournaments.clear();
+        tableModel.setRowCount(0);
+        tableModel.fireTableDataChanged();
+        if(jSearchTournament.getText() != null){
+            tableModel.setRowCount(0);
+            tableModel.fireTableDataChanged();
+            for(Tournament tournament : tournaments){
+                if(tournament.toString().contains(jSearchTournament.getText())) {
+                    searchedTournaments.add(tournament);
+                }
+            }
+            for(Tournament tournament : searchedTournaments){
+                tableModel.addRow(tournament.getInfo());
+            }
+            this.jTournamentTable.setModel(tableModel);
+        }
+        else{
+            searchedTournaments.clear();
+            tableModel.setRowCount(0);
+            tableModel.fireTableDataChanged();
+            fillTable();
+        }
+    }//GEN-LAST:event_jSearchTournamentActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jSearchTournament;
     private javax.swing.JTable jTournamentTable;
@@ -91,5 +142,26 @@ public class TournamentOverview extends javax.swing.JPanel {
 
     private void initTable() {
         jTournamentTable.setAutoCreateRowSorter(true);
+    }
+    
+     private void fillTable() {
+        String[] columns = {"Type", "Entree", "Adres", "Plaats", "Datum"};
+        tableModel = new DefaultTableModel(columns, 0);   
+        for(Tournament tournament : tournaments){
+            tableModel.addRow(tournament.getInfo());
+        }
+        this.jTournamentTable.setModel(tableModel);
+    }
+    
+    private void initSorter() {
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTournamentTable.getModel());
+        jTournamentTable.setRowSorter(sorter);
+        
+        Comparator<String> comparator = new Comparator<String>() {
+
+            public int compare(String o1, String o2) {
+                return 0;
+            }
+        };
     }
 }

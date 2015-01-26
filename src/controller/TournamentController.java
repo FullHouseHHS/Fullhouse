@@ -10,6 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import model.Tournament;
 import model.Location;
+import utilities.databaseUtil.DateUtil;
 /**
  *
  * @author Jeroen
@@ -17,35 +18,34 @@ import model.Location;
 public class TournamentController {
     private static ArrayList<Tournament> tournaments;
     
-    public static void addTournament(int tournamentId, ArrayList<Location> locations) {
+    public static String addTournament(String type, double entryFee, Location location, java.util.Date date) {
         try {
-            for(Location location : locations) {
-                
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
-            //tournament
-            String prepStatInsertTournament = "INSERT INTO tournament (tournamentId, address, location "
-                                            + "VALUES (?, ?, ?)";
+            String prepStatInsertTournament = "INSERT INTO tournament (type, entry_fee, address, city, date"
+                                            + "VALUES (?, ?, ?, ?, ?)";
             PreparedStatement prepStat =  conn.prepareStatement(prepStatInsertTournament);
             
-            prepStat.setInt(1, tournamentId);
-            prepStat.setString(2, location.getAddress());
-            prepStat.setString(3, location.getLocation());
+            prepStat.setString(1, type);
+            prepStat.setDouble(1, entryFee);
+            prepStat.setString(3, location.getAddress());
+            prepStat.setString(4, location.getCity());
+            prepStat.setDate(5, DateUtil.toSqlDate(date));
+            
             
             System.out.println(prepStat);
             prepStat.executeUpdate();
             
-            stat.close();
-            }
-            
+            stat.close(); 
+            return "Succesvol het toernooi toegevoegd!";
         }
-        
         catch (SQLException exc) {
-                System.err.println("Sql fout bij het toevoegen van het Tournament: " + exc.toString());
+                System.err.println("Sql fout bij het toevoegen van het toernooi: " + exc.toString());
+                return "Sql fout bij het toevoegen van het toernooi.";
             }
     }
-    
+    /*
     //weet niet zeker of deze methode zo goed is, heb hem overgenomen van TableController (TableController heeft nog vreemde sleutels erin staan)        
     public static void updateTournament(int tournamentId, Tournament tournament){
         try {
@@ -115,7 +115,7 @@ public class TournamentController {
             System.err.println("Sql fout bij het ophalen van het Tournament: " + exc.toString());
         }
     }
-    
+    */
     public static ArrayList<Tournament> getTournaments() {
         return tournaments;
     } 
