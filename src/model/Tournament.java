@@ -5,27 +5,61 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author CVD
  */
 public class Tournament {
-    private int tournamentId;
+    private int toId;
     Location location;
+    String type;
+    private double entryFee;
+    Date date;
 
-    public Tournament(int tournamentId, Location location) {
-        this.tournamentId = tournamentId;
+    public Tournament(int toId, String type, double entryFee, Location location, Date date) {
+        this.toId = toId;
+        this.type = type;
+        this.entryFee = entryFee;
         this.location = location;
+        this.date = date;
     }
 
-    //public enum TournamentType { POKER, PLAY JASS, BRIDGE};
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
+    public double getEntreeFee() {
+        return entryFee;
+    }
+
+    public int getToId() {
+        return toId;
+    }
+
+    public void setEntreeFee(double entreeFee) {
+        this.entryFee = entreeFee;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
     
     public int getTournamentId() {
-        return tournamentId;
+        return toId;
     }
 
     public void setTournamentId(int tournamentId) {
-        this.tournamentId = tournamentId;
+        this.toId = tournamentId;
     }
     
     public Location getLocation() {
@@ -38,6 +72,10 @@ public class Tournament {
     
     @Override
     public String toString(){
-        return "" + tournamentId + "   " + location.getAddress() + "   " + location.getLocation() + "   ";
+        return "" + toId + "   " + type + "   " + entryFee + "   " + location.getAddress() + "   " + location.getCity() + "   " + date;
+    }
+    
+    public String[] getInfo(){
+        return new String[]{this.type, Double.toString(this.entryFee), this.location.getAddress(), this.location.getCity(), date.toString()};
     }
 }

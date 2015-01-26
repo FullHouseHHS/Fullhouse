@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.Date;
+
 /**
  *
  * @author CVD
@@ -15,13 +17,39 @@ public class Masterclass {
     private int maxEntries;
     Player host;
     Location location;
+    Date date;
 
-    public Masterclass(int m_id, Player host, int maxEntries, double minRating, Location location){
+    public Masterclass(int m_id, Player host, int maxEntries, double minRating, Location location, Date date){
         this.m_id = m_id;
         this.host = host;
         this.maxEntries = maxEntries;
         this.minRating = minRating;
         this.location = location;
+        this.date = date;
+    }
+
+    public int getMaxEntries() {
+        return maxEntries;
+    }
+
+    public void setMaxEntries(int maxEntries) {
+        this.maxEntries = maxEntries;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public int getM_id() {
@@ -31,10 +59,6 @@ public class Masterclass {
     public void setM_id(int m_id) {
         this.m_id = m_id;
     }
-    
-    public int getId(){
-        return m_id;
-    }
 
     public double getMinRating() {
         return minRating;
@@ -42,14 +66,6 @@ public class Masterclass {
 
     public void setMinRating(double minRating) {
         this.minRating = minRating;
-    }
-
-    public int getMaxParticipants() {
-        return maxEntries;
-    }
-
-    public void setMaxParticipants(int maxParticipants) {
-        this.maxEntries = maxParticipants;
     }
 
     public Player getHost() {
@@ -62,6 +78,6 @@ public class Masterclass {
     
     @Override
     public String toString(){
-        return "" + m_id + "   " + host + "   " + minRating + "   " + maxEntries + "   ";
+        return "" + m_id + "   " + host + "   " + maxEntries + "   " + minRating + "   " + location.getAddress()+  "   " + location.getCity() + "   " + date;
     }
 }
