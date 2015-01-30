@@ -60,12 +60,12 @@ public class PlayerController {
         }
     }
     
-    public static String updatePlayer(String firstName, String lastName, int telephoneNumber, String emailAddress, double rating, boolean is_famous, String address, String zipcode, String city, Player player){
+    public static String updatePlayer(Player player){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
-            if(is_famous){
+            if(player.isIs_famous()){
                famous = "T";
             }
             else{
@@ -76,15 +76,15 @@ public class PlayerController {
             
             PreparedStatement prepStat =  conn.prepareStatement(prepStatUpdatePlayer);
             
-            prepStat.setString(1, firstName);
-            prepStat.setString(2, lastName);
-            prepStat.setInt(3, telephoneNumber);
-            prepStat.setString(4, emailAddress);
-            prepStat.setDouble(5, rating);
+            prepStat.setString(1, player.getFirstName());
+            prepStat.setString(2, player.getLastName());
+            prepStat.setInt(3, player.getTelephoneNumber());
+            prepStat.setString(4, player.getEmailAddress());
+            prepStat.setDouble(5, player.getRating());
             prepStat.setBoolean(6, is_famous);
-            prepStat.setString(7, address);
-            prepStat.setString(8, zipcode);
-            prepStat.setString(9, city);
+            prepStat.setString(7, player.getAddress());
+            prepStat.setString(8, player.getZipCode());
+            prepStat.setString(9, player.getCity());
             prepStat.setInt(10, player.getId());
             
             System.out.println(prepStat);
@@ -98,35 +98,12 @@ public class PlayerController {
         }
     }
     
-    public static String updateRating(double rating) {
-        try{
-            Connection conn = DataBaseConnector.getConnection(); 
-            Statement stat = conn.createStatement();
-            
-            
-            String prepStatChangeRating = "UPDATE player SET rating=? WHERE id = ?";
-            
-            PreparedStatement prepStat =  conn.prepareStatement(prepStatChangeRating);
-            
-            prepStat.setDouble(1, rating);
-            
-            System.out.println(prepStat);
-            prepStat.executeUpdate();
-            stat.close();
-            return "Succesvol de Rating gewijzigd!";
-        }
-            catch (SQLException exc) {
-            System.err.println("Sql fout bij het wijzigen van de Rating: " + exc.toString());
-            return "Sql fout bij het wijzigen van de Rating.";
-        }   
-    }
-    
     public static String deletePlayer(Player player){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
-            String prepStatDeletePlayer = "DELETE FROM player WHERE id = ?";
+            String prepStatDeletePlayer = "DELETE FROM player WHERE s_id = ?";
             PreparedStatement prepStat =  conn.prepareStatement(prepStatDeletePlayer);
             
             prepStat.setInt(1, player.getId());

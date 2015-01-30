@@ -7,7 +7,6 @@ package view.overview;
 
 import controller.PlayerController;
 import java.util.ArrayList;
-import java.util.Comparator;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -46,6 +45,7 @@ public class PlayerOverview extends javax.swing.JPanel {
         jPlayerTable = new javax.swing.JTable();
         jSearchPlayer = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jPlayerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,6 +75,13 @@ public class PlayerOverview extends javax.swing.JPanel {
 
         jLabel1.setText("Zoek een speler:");
 
+        jButton1.setText("Delete player(s)");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,7 +91,8 @@ public class PlayerOverview extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSearchPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -94,10 +102,15 @@ public class PlayerOverview extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSearchPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jSearchPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(10, 10, 10)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -128,8 +141,18 @@ public class PlayerOverview extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jSearchPlayerKeyReleased
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DefaultTableModel model = (DefaultTableModel) this.jPlayerTable.getModel();
+        int[] rows = jPlayerTable.getSelectedRows();
+        for(int i=0;i<rows.length;i++){
+            PlayerController.deletePlayer(players.get(rows[i]-i));
+        }
+        fillTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTable jPlayerTable;
     private javax.swing.JScrollPane jScrollPane1;
@@ -137,17 +160,14 @@ public class PlayerOverview extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void fillTable() {
-<<<<<<< HEAD
         String[] columns = {"Voornaam", "Achternaam", "Rating", "Adres", "Postcode", "Woonplaats", "Telefoonnummer", "Emailadres", "Bekend"};
-=======
-        String[] columns = {"Voornaam", "Achternaam", "Rating", "Woonplaats", "Postcode", "Telefoonnummer", "Emailadres", "Bekend"};
->>>>>>> origin/master
         tableModel = new DefaultTableModel(columns, 0);   
         if(players != null){
             for(Player player : players){
                 tableModel.addRow(player.getInfo());
             }
         }
+        tableModel.fireTableDataChanged();
         this.jPlayerTable.setModel(tableModel);
     }
     
