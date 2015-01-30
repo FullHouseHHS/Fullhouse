@@ -13,21 +13,6 @@ import java.util.Date;
  */
 public class Masterclass {
     private int m_id;
-<<<<<<< HEAD
-    private int minRating;
-    private int maxParticipants;
-    Player lecturer;
-    
-
-    ArrayList<Player> playerList;
-    
-    public Masterclass(Player lecturer,int m_id, int maxParticipants, int minRating, ArrayList<Player> playerList){
-
-    public Masterclass(int m_id, Player lecturer, int maxParticipants, int minRating){
-        this.m_id = m_id;
-
-        this.lecturer = lecturer;
-=======
     private double minRating;
     private int maxEntries;
     Player host;
@@ -35,7 +20,6 @@ public class Masterclass {
     Date date;
 
     public Masterclass(int m_id, Player host, int maxEntries, double minRating, Location location, Date date){
->>>>>>> 7fe854317ba6af859cac09aeb2c163bbff198926
         this.m_id = m_id;
         this.host = host;
         this.maxEntries = maxEntries;
