@@ -9,7 +9,6 @@ import controller.PlayerController;
 import view.add.AddObjects;
 import view.add.AddPlayer;
 import view.overview.Overview;
-import view.ratingSystem.RatingSystem;
 
 /**
  *
@@ -103,7 +102,6 @@ public class FullHouseGUI extends javax.swing.JFrame {
         this.jTabbedPane.add("Overzichten", new Overview());
         this.jTabbedPane.add("Toevoegen", new AddObjects());
         this.jTabbedPane.add("Speler toevoegen", new AddPlayer());
-        //this.jTabbedPane.add("Rating System", new RatingSystem());
     }
 
     private void initData() {

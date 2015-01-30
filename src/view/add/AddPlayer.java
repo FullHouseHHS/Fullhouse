@@ -16,9 +16,8 @@ import javax.swing.JTextField;
  */
 public class AddPlayer extends javax.swing.JPanel {
 
-    private String firstName, lastName, address, zipCode, emailAddress, city;
+    private String firstName, lastName, address, zipCode, emailAddress, phoneNumber, city;
     private final int rating = 250;
-    int phoneNumber;
     boolean isFamous;
     
     JTextField[] textFields;
@@ -353,7 +352,7 @@ public class AddPlayer extends javax.swing.JPanel {
         if (!incorrectInput) {
             setValues();
             //Submit to database
-            String addedToDatabase = PlayerController.addPlayer(firstName, lastName, phoneNumber, emailAddress, rating, isFamous, address, zipCode, city);
+            String addedToDatabase = PlayerController.addPlayer(firstName, lastName, address, zipCode, city, emailAddress, phoneNumber, rating, isFamous);
             if (addedToDatabase.contains("fout")) {
                 this.jInvalidInput.setVisible(true);
                 this.jInvalidInput.setForeground(Color.RED);
@@ -417,8 +416,14 @@ public class AddPlayer extends javax.swing.JPanel {
         address = this.jAddressLetters.getText() + " " + this.jAddressNumbers.getText();
         zipCode = this.jZipCodeNumbers.getText() + " " + this.jZipCodeLetters.getText();
         city = this.jCity.getText();
-        phoneNumber = Integer.parseInt(this.jPhoneNumber.getText());
         emailAddress = this.jEmailAddress.getText();
+        
+        if(this.jPhoneNumber.getText().startsWith("0")){
+            phoneNumber = "o" + this.jPhoneNumber.getText().substring(1);
+        }
+        else{
+            phoneNumber = this.jPhoneNumber.getText();
+        }
     }
 
     private void initArrays() { 

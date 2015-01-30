@@ -8,39 +8,39 @@ public class Player {
     private int id;
     private String firstName;
     private String lastName;
-    private String emailAddress;
-    
-    private int telephoneNumber;
-    private double rating;
-    
-    private boolean is_famous;
     private String address;
     private String city;
     private String zipCode;
+    private String emailAddress;
+    private String telephoneNumber;
     
-    public Player(int id, String firstName, String lastName, int telephoneNumber,String emailAddress, double rating, boolean is_famous, String address, String city, String zipCode) {
+    private double rating;    
+    private boolean famous;
+
+    
+    public Player(int id, String firstName, String lastName, String address, String zipCode, String city, String emailAddress, String telephoneNumber, double rating, boolean famous) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.telephoneNumber = telephoneNumber;
-        this.emailAddress = emailAddress;
-        this.rating = rating;
-        this.is_famous = is_famous;
         this.address = address;
         this.zipCode = zipCode;
         this.city = city;
+        this.emailAddress = emailAddress;
+        this.telephoneNumber = telephoneNumber;
+        this.rating = rating;
+        this.famous = famous;
     }
 
     public int getId() {
         return id;
     }
 
-    public boolean isIs_famous() {
-        return is_famous;
+    public boolean isfamous() {
+        return famous;
     }
 
-    public void setIs_famous(boolean is_famous) {
-        this.is_famous = is_famous;
+    public void setFamous(boolean famous) {
+        this.famous = famous;
     }
 
     public String getEmailAddress() {
@@ -51,11 +51,11 @@ public class Player {
         this.emailAddress = emailAddress;
     }
 
-    public int getTelephoneNumber() {
+    public String getTelephoneNumber() {
         return telephoneNumber;
     }
 
-    public void setTelephoneNumber(int telephoneNumber) {
+    public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
     }
     
@@ -110,11 +110,11 @@ public class Player {
     
     @Override
     public String toString(){
-        return "" + firstName + " " + lastName + "   " + address + "   " + city + "   " +  zipCode  + "   " +  telephoneNumber + "   " + emailAddress + "   " + is_famous;    
+        return "" + firstName + " " + lastName + "   " + address + "   " + zipCode + "   " +  city  + "   " +  emailAddress + "   " + telephoneNumber + "   " + rating + "   " + famous;    
     }
     
     public String[] getInfo(){
-        return new String[]{this.firstName, this.lastName, Double.toString(this.rating), this.address, this.city, this.zipCode, Integer.toString(this.telephoneNumber), this.emailAddress, Boolean.toString(this.is_famous)};
+        return new String[]{this.firstName, this.lastName, this.address, this.zipCode, this.city, this.emailAddress, this.telephoneNumber, Double.toString(this.rating), Boolean.toString(this.famous)};
     }
     
 }

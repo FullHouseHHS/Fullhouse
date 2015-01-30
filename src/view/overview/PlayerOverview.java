@@ -7,6 +7,7 @@ package view.overview;
 
 import controller.PlayerController;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -21,7 +22,7 @@ public class PlayerOverview extends javax.swing.JPanel {
     DefaultTableModel tableModel;
     private ArrayList<Player> players;
     private ArrayList<Player> searchedPlayers = new ArrayList();
-    
+    String[] columns = {"Voornaam", "Achternaam", "Adres", "Postcode", "Woonplaats", "Emailadres", "Telefoonnummer","Rating", "Bekend"};
     /**
      * Creates new form PlayerOverview
      */
@@ -64,6 +65,11 @@ public class PlayerOverview extends javax.swing.JPanel {
             }
         });
         jPlayerTable.getTableHeader().setReorderingAllowed(false);
+        jPlayerTable.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jPlayerTablePropertyChange(evt);
+            }
+        });
         jScrollPane1.setViewportView(jPlayerTable);
 
         jSearchPlayer.setToolTipText("Zoek een speler..");
@@ -150,6 +156,52 @@ public class PlayerOverview extends javax.swing.JPanel {
         fillTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jPlayerTablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jPlayerTablePropertyChange
+        try{
+            int column = jPlayerTable.getSelectedColumn();
+            int row = jPlayerTable.getSelectedRow();
+            Player player = players.get(row);
+            String rColumn = columns[column];
+            String value = (String)jPlayerTable.getValueAt(jPlayerTable.getSelectedRow(),jPlayerTable.getSelectedColumn()); 
+
+            switch(rColumn.toLowerCase()){
+                case "voornaam":
+                    player.setFirstName(value);
+                break;
+                case "achternaam":
+                    player.setLastName(value);
+                break;
+                case "adres":
+                    player.setAddress(value);
+                break;
+                case "postcode":
+                    player.setZipCode(value);
+                break;
+                case "woonplaats":
+                    player.setCity(value);
+                break;
+                case "emailadres":
+                    player.setEmailAddress(value);
+                break;
+                case "telefoonnummer":
+                    if(value.startsWith("0")){
+                        value = "o" + value.substring(1);
+                    }
+                    player.setTelephoneNumber(value);
+                break;
+                case "rating":
+                    JOptionPane.showMessageDialog(this, "Rating kan niet aangepast worden!", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+                case "bekend":
+                    player.setFamous(Boolean.parseBoolean(value));
+                break;
+            }
+            PlayerController.updatePlayer(player);
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_jPlayerTablePropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -160,7 +212,6 @@ public class PlayerOverview extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void fillTable() {
-        String[] columns = {"Voornaam", "Achternaam", "Rating", "Adres", "Postcode", "Woonplaats", "Telefoonnummer", "Emailadres", "Bekend"};
         tableModel = new DefaultTableModel(columns, 0);   
         if(players != null){
             for(Player player : players){
