@@ -32,6 +32,7 @@ public class TournamentOverview extends javax.swing.JPanel {
         initTable();
         fillTable();
         initSorter();
+        
     }
 
     /**
@@ -147,8 +148,10 @@ public class TournamentOverview extends javax.swing.JPanel {
      private void fillTable() {
         String[] columns = {"Type", "Entree", "Adres", "Plaats", "Datum"};
         tableModel = new DefaultTableModel(columns, 0);   
-        for(Tournament tournament : tournaments){
-            tableModel.addRow(tournament.getInfo());
+        if(tournaments != null){
+            for(Tournament tournament : tournaments){
+                tableModel.addRow(tournament.getInfo());
+            }
         }
         this.jTournamentTable.setModel(tableModel);
     }

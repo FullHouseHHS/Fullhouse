@@ -137,25 +137,18 @@ public class PlayerOverview extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void fillTable() {
-        String[] columns = {"Voornaam", "Achternaam", "Adres", "Woonplaats", "Postcode", "Telefoonnummer", "Emailadres", "Bekend"};
+        String[] columns = {"Voornaam", "Achternaam", "Rating", "Adres", "Postcode", "Woonplaats", "Telefoonnummer", "Emailadres", "Bekend"};
         tableModel = new DefaultTableModel(columns, 0);   
-        for(Player player : players){
-            tableModel.addRow(player.getInfo());
+        if(players != null){
+            for(Player player : players){
+                tableModel.addRow(player.getInfo());
+            }
         }
         this.jPlayerTable.setModel(tableModel);
     }
     
     private void initSorter() {
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(jPlayerTable.getModel());
+        TableRowSorter<TableModel> sorter = new TableRowSorter(jPlayerTable.getModel());
         jPlayerTable.setRowSorter(sorter);
-        
-        Comparator<String> comparator = new Comparator<String>() {
-
-            public int compare(String o1, String o2) {
-                return 0;
-            }
-        };
     }
-    
-    
 }

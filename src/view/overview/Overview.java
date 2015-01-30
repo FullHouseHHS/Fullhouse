@@ -55,7 +55,7 @@ public class Overview extends javax.swing.JPanel {
 
     private void initTabs() {
         this.jTabbedPane.add("Speler overzicht", new PlayerOverview());
-        this.jTabbedPane.add("Toernooi overzicht", new TournamentOverview());
+        //this.jTabbedPane.add("Toernooi overzicht", new TournamentOverview());
         this.jTabbedPane.add("Betalingen van spelers", new FuturePlayerOverview());
     }
 }

@@ -114,7 +114,7 @@ public class Player {
     }
     
     public String[] getInfo(){
-        return new String[]{this.firstName, this.lastName, Double.toString(this.rating), this.address, this.city, Integer.toString(this.telephoneNumber), this.emailAddress, Boolean.toString(this.is_famous)};
+        return new String[]{this.firstName, this.lastName, Double.toString(this.rating), this.address, this.city, this.zipCode, Integer.toString(this.telephoneNumber), this.emailAddress, Boolean.toString(this.is_famous)};
     }
     
 }
