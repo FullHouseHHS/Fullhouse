@@ -22,10 +22,15 @@ import model.Player;
  */
 public class MasterclassController {
     private static ArrayList<Masterclass> masterclasses;
+<<<<<<< HEAD
+    
+    public static String addMasterclass(int min_rating, int max_entries, String address, String city, String host){
+=======
     private static Player host;
     private static Location mLocation;
   
     public static String addMasterclass(Player host, int minRating, int maxEntries, Location location){
+>>>>>>> 7fe854317ba6af859cac09aeb2c163bbff198926
         try {
             Connection conn = DataBaseConnector.getConnection();
             Statement stat = conn.createStatement();
