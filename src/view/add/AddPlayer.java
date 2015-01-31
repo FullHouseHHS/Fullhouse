@@ -16,10 +16,8 @@ import javax.swing.JTextField;
  */
 public class AddPlayer extends javax.swing.JPanel {
 
-    private String firstName, lastName, address, zipCode, emailAddress, phoneNumber, city;
-    private final int rating = 250;
-    boolean isFamous;
-    
+    private String firstName, lastName, address, zipCode, emailAddress, phoneNumber, city, famous;
+    private final int rating = 250;    
     JTextField[] textFields;
         
     String[] stringFields;
@@ -49,7 +47,7 @@ public class AddPlayer extends javax.swing.JPanel {
 
         jButton1 = new javax.swing.JButton();
         jInvalidInput = new javax.swing.JLabel();
-        jKnownPlayer = new javax.swing.JCheckBox();
+        jFamousPlayer = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jEmailAddress = new javax.swing.JTextField();
@@ -92,7 +90,7 @@ public class AddPlayer extends javax.swing.JPanel {
         jInvalidInput.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jInvalidInput.setText("dummy");
 
-        jKnownPlayer.setText("Is bekende speler");
+        jFamousPlayer.setText("Is bekende speler");
 
         jLabel6.setText("Bekende speler?");
 
@@ -215,7 +213,7 @@ public class AddPlayer extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jPhoneNumber, javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jEmailAddress, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jKnownPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                .addComponent(jFamousPlayer, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGap(145, 145, 145)))
         );
@@ -271,7 +269,7 @@ public class AddPlayer extends javax.swing.JPanel {
                         .addComponent(jLabel5))
                     .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jKnownPlayer)
+                        .addComponent(jFamousPlayer)
                         .addComponent(jLabel6))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                     .addComponent(jInvalidInput, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -352,7 +350,7 @@ public class AddPlayer extends javax.swing.JPanel {
         if (!incorrectInput) {
             setValues();
             //Submit to database
-            String addedToDatabase = PlayerController.addPlayer(firstName, lastName, address, zipCode, city, emailAddress, phoneNumber, rating, isFamous);
+            String addedToDatabase = PlayerController.addPlayer(firstName, lastName, address, zipCode, city, emailAddress, phoneNumber, rating, famous);
             if (addedToDatabase.contains("fout")) {
                 this.jInvalidInput.setVisible(true);
                 this.jInvalidInput.setForeground(Color.RED);
@@ -388,10 +386,10 @@ public class AddPlayer extends javax.swing.JPanel {
     private javax.swing.JLabel jCityError;
     private javax.swing.JTextField jEmailAddress;
     private javax.swing.JLabel jEmailError;
+    private javax.swing.JCheckBox jFamousPlayer;
     private javax.swing.JTextField jFirstName;
     private javax.swing.JLabel jFirstNameError;
     private javax.swing.JLabel jInvalidInput;
-    private javax.swing.JCheckBox jKnownPlayer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -423,6 +421,13 @@ public class AddPlayer extends javax.swing.JPanel {
         }
         else{
             phoneNumber = this.jPhoneNumber.getText();
+        }
+        
+        if(this.jFamousPlayer.isSelected()){
+           famous = "T";
+        }
+        else{
+           famous = "F"; 
         }
     }
 

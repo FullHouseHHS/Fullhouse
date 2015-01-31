@@ -12,25 +12,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import model.Location;
 import model.Masterclass;
 import model.Player;
+import utilities.databaseUtil.DateUtil;
 
 /**
  *
  * @author Nick Schulte
  */
 public class MasterclassController {
-    private static ArrayList<Masterclass> masterclasses;
-<<<<<<< HEAD
-    
-    public static String addMasterclass(int min_rating, int max_entries, String address, String city, String host){
-=======
+    private static ArrayList<Masterclass> masterclasses = new ArrayList();
     private static Player host;
     private static Location mLocation;
   
     public static String addMasterclass(Player host, int minRating, int maxEntries, Location location){
->>>>>>> 7fe854317ba6af859cac09aeb2c163bbff198926
         try {
             Connection conn = DataBaseConnector.getConnection();
             Statement stat = conn.createStatement();
@@ -57,21 +54,22 @@ public class MasterclassController {
         }
     }
     
-    public static String updateMasterclass(Player host, int minRating, int maxEntries, Location location, Masterclass masterclass){
+    public static String updateMasterclass(Masterclass masterclass){
         try {
             Connection conn = DataBaseConnector.getConnection();
             Statement stat = conn.createStatement();
             
-            String prepStatChangeMasterclass = "UPDATE masterclass SET min_rating=?, max_entries=?, address=?, city=?, host=? WHERE m_id = ?";
+            String prepStatChangeMasterclass = "UPDATE masterclass SET min_rating=?, max_entries=?, address=?, city=?, host=?, date=? WHERE m_id = ?";
             
             PreparedStatement prepStat = conn.prepareStatement(prepStatChangeMasterclass);
             
-            prepStat.setInt(1, minRating);
-            prepStat.setInt(2, maxEntries);
-            prepStat.setString(3, location.getAddress());
-            prepStat.setString(4, location.getCity());
-            prepStat.setInt(5, host.getId());
-            prepStat.setInt(6, masterclass.getId());
+            prepStat.setDouble(1, masterclass.getMinRating());
+            prepStat.setInt(2, masterclass.getMaxEntries());
+            prepStat.setString(3, masterclass.getLocation().getAddress());
+            prepStat.setString(4, masterclass.getLocation().getCity());
+            prepStat.setInt(5, masterclass.getHost().getId());
+            prepStat.setTimestamp(6, DateUtil.toSqlTimestamp(masterclass.getDate()));
+            prepStat.setInt(7, masterclass.getId());
             
             System.out.println(prepStat);
             prepStat.executeUpdate();
@@ -113,12 +111,13 @@ public class MasterclassController {
             ResultSet result = stat.executeQuery("SELECT * FROM masterclass");
             
             while (result.next()) {
-                int m_id = result.getInt("m_id");
+                int id = result.getInt("m_id");
+                int hostId = result.getInt("host");
                 int minRating = result.getInt("min_rating");
                 int maxEntries = result.getInt("max_entries");
                 String address = result.getString("address");
                 String city = result.getString("city");
-                int hostId = result.getInt("host");
+                Date date = result.getTimestamp("date");
                 
                 ArrayList<Player> players= PlayerController.getPlayers();
                 for(Player player : players){
@@ -130,11 +129,11 @@ public class MasterclassController {
                 ArrayList<Location> locations = LocationController.getLocations();
                 for(Location location : locations){
                     if((address.equals(location.getAddress()))&&(city.equals(location.getCity()))){
-                        location = mLocation;
+                        mLocation = location;
                     }
                 }
                 
-                Masterclass masterclass = new Masterclass(m_id, host, minRating, maxEntries, mLocation);
+                Masterclass masterclass = new Masterclass(id, host, maxEntries, minRating, mLocation, date);
                 masterclasses.add(masterclass);
             }
             

@@ -14,14 +14,23 @@ import java.util.Date;
  */
 public class EnrollmentM {
     private Date date;
-    //private boolean paid;
-    Player player;
-    Masterclass masterclass;
+    private String paid;
+    private Player player;
+    private Masterclass masterclass;
     
-    public EnrollmentM(Player player, Masterclass masterclass, Date date) {
+    public EnrollmentM(Player player, Masterclass masterclass, Date date, String paid) {
         this.player = player;
         this.masterclass = masterclass;
         this.date = date;
+        this.paid = paid;
+    }
+
+    public String getPaid() {
+        return paid;
+    }
+
+    public void setPaid(String paid) {
+        this.paid = paid;
     }
 
     public Date getDate() {
@@ -50,6 +59,6 @@ public class EnrollmentM {
     
     @Override
     public String toString(){
-        return "" + player.getId() + "   " + masterclass.getM_id() + "   " + date + "   ";
+        return "" + player.getId() + "   " + masterclass.getId() + "   " + date + "   " + paid;
     }    
 }

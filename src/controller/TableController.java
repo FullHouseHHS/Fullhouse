@@ -17,7 +17,7 @@ import model.Table;
  * je wilt tabellen toevoegen, tabellen aanpassen, players in de tabellen weghalen/toevoegen/wijzigen, tabellen verwijderen
  */
 public class TableController {
-    private static ArrayList<Table> tables;
+    private static ArrayList<Table> tables = new ArrayList();
     
     public static void addTable(int tableNumber, ArrayList<Player> players){
         try {

@@ -13,12 +13,11 @@ public class Player {
     private String zipCode;
     private String emailAddress;
     private String telephoneNumber;
-    
+    private String famous;
     private double rating;    
-    private boolean famous;
 
     
-    public Player(int id, String firstName, String lastName, String address, String zipCode, String city, String emailAddress, String telephoneNumber, double rating, boolean famous) {
+    public Player(int id, String firstName, String lastName, String address, String zipCode, String city, String emailAddress, String telephoneNumber, double rating, String famous) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,11 +34,11 @@ public class Player {
         return id;
     }
 
-    public boolean isfamous() {
+    public String isFamous() {
         return famous;
     }
 
-    public void setFamous(boolean famous) {
+    public void setFamous(String famous) {
         this.famous = famous;
     }
 
@@ -114,7 +113,6 @@ public class Player {
     }
     
     public String[] getInfo(){
-        return new String[]{this.firstName, this.lastName, this.address, this.zipCode, this.city, this.emailAddress, this.telephoneNumber, Double.toString(this.rating), Boolean.toString(this.famous)};
+        return new String[]{this.firstName, this.lastName, this.address, this.zipCode, this.city, this.emailAddress, this.telephoneNumber, Double.toString(this.rating), this.famous};
     }
-    
 }

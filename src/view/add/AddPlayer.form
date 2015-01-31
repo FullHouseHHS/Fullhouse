@@ -95,7 +95,7 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jPhoneNumber" alignment="1" max="32767" attributes="0"/>
                               <Component id="jEmailAddress" alignment="1" max="32767" attributes="0"/>
-                              <Component id="jKnownPlayer" alignment="0" pref="210" max="32767" attributes="0"/>
+                              <Component id="jFamousPlayer" alignment="0" pref="210" max="32767" attributes="0"/>
                               <Component id="jButton1" alignment="1" min="-2" pref="110" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -168,7 +168,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jKnownPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jFamousPlayer" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="40" max="32767" attributes="0"/>
@@ -200,7 +200,7 @@
         <Property name="text" type="java.lang.String" value="dummy"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="jKnownPlayer">
+    <Component class="javax.swing.JCheckBox" name="jFamousPlayer">
       <Properties>
         <Property name="text" type="java.lang.String" value="Is bekende speler"/>
       </Properties>

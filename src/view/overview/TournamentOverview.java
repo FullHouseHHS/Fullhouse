@@ -25,14 +25,13 @@ public class TournamentOverview extends javax.swing.JPanel {
     DefaultTableModel tableModel;
     private ArrayList<Tournament> tournaments;
     private ArrayList<Tournament> searchedTournaments;
+    String[] columns = {"Type", "Entree", "Adres", "Plaats", "Datum"};
     
     public TournamentOverview() {
         this.tournaments = TournamentController.getTournaments();
         initComponents();
-        initTable();
         fillTable();
         initSorter();
-        
     }
 
     /**
@@ -140,13 +139,8 @@ public class TournamentOverview extends javax.swing.JPanel {
     private javax.swing.JTextField jSearchTournament;
     private javax.swing.JTable jTournamentTable;
     // End of variables declaration//GEN-END:variables
-
-    private void initTable() {
-        jTournamentTable.setAutoCreateRowSorter(true);
-    }
     
-     private void fillTable() {
-        String[] columns = {"Type", "Entree", "Adres", "Plaats", "Datum"};
+    private void fillTable() {
         tableModel = new DefaultTableModel(columns, 0);   
         if(tournaments != null){
             for(Tournament tournament : tournaments){
@@ -159,12 +153,5 @@ public class TournamentOverview extends javax.swing.JPanel {
     private void initSorter() {
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(jTournamentTable.getModel());
         jTournamentTable.setRowSorter(sorter);
-        
-        Comparator<String> comparator = new Comparator<String>() {
-
-            public int compare(String o1, String o2) {
-                return 0;
-            }
-        };
     }
 }

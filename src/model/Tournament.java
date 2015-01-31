@@ -11,17 +11,21 @@ import java.util.Date;
  * @author CVD
  */
 public class Tournament {
-    private int toId;
+    private int id;
     Location location;
+    private String lAdress;
+    private String lCity;
     String type;
     private double entryFee;
     Date date;
 
-    public Tournament(int toId, String type, double entryFee, Location location, Date date) {
-        this.toId = toId;
+    public Tournament(int id, String type, double entryFee, Location location, Date date) {
+        this.id = id;
         this.type = type;
         this.entryFee = entryFee;
         this.location = location;
+        this.lAdress = location.getAddress();
+        this.lCity = location.getCity();
         this.date = date;
     }
 
@@ -37,10 +41,6 @@ public class Tournament {
         return entryFee;
     }
 
-    public int getToId() {
-        return toId;
-    }
-
     public void setEntreeFee(double entreeFee) {
         this.entryFee = entreeFee;
     }
@@ -53,12 +53,12 @@ public class Tournament {
         this.type = type;
     }
     
-    public int getTournamentId() {
-        return toId;
+    public int getId() {
+        return id;
     }
 
-    public void setTournamentId(int tournamentId) {
-        this.toId = tournamentId;
+    public void setId(int id) {
+        this.id = id;
     }
     
     public Location getLocation() {
@@ -71,10 +71,10 @@ public class Tournament {
     
     @Override
     public String toString(){
-        return "" + toId + "   " + type + "   " + entryFee + "   " + location.getAddress() + "   " + location.getCity() + "   " + date;
+        return "" + type + "   " + entryFee + "   " + location.getAddress() + "   " + location.getCity() + "   " + date;
     }
     
     public String[] getInfo(){
-        return new String[]{this.type, Double.toString(this.entryFee), this.location.getAddress(), this.location.getCity(), date.toString()};
+        return new String[]{this.type, Double.toString(this.entryFee), this.lAdress, this.lCity, date.toString()};
     }
 }

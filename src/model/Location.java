@@ -12,13 +12,23 @@ package model;
 public class Location {
     
     private String address;
+    private String zipcode;
     private String city;
     private int maxTables;
     
-    public Location(String address, String city, int maxTables) {
+    public Location(String address, String zipcode, String city, int maxTables) {
         this.address = address;
+        this.zipcode = zipcode;
         this.city = city;
         this.maxTables = maxTables;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 
     public String getCity() {

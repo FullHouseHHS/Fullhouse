@@ -6,25 +6,32 @@
 package model;
 
 import java.util.Date;
+import utilities.databaseUtil.DateUtil;
 
 /**
  *
  * @author CVD
  */
 public class Masterclass {
-    private int m_id;
+    private int id;
+    private String hostName;
     private double minRating;
     private int maxEntries;
+    private String lAdress;
+    private String lCity;
     Player host;
     Location location;
     Date date;
 
-    public Masterclass(int m_id, Player host, int maxEntries, double minRating, Location location, Date date){
-        this.m_id = m_id;
+    public Masterclass(int id, Player host, int maxEntries, double minRating, Location location, Date date){
+        this.id = id;
         this.host = host;
+        this.hostName = host.getFirstName() + " " + host.getLastName();
         this.maxEntries = maxEntries;
         this.minRating = minRating;
         this.location = location;
+        this.lAdress = location.getAddress();
+        this.lCity = location.getCity();
         this.date = date;
     }
 
@@ -52,12 +59,12 @@ public class Masterclass {
         this.date = date;
     }
 
-    public int getM_id() {
-        return m_id;
+    public int getId() {
+        return id;
     }
 
-    public void setM_id(int m_id) {
-        this.m_id = m_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public double getMinRating() {
@@ -78,6 +85,9 @@ public class Masterclass {
     
     @Override
     public String toString(){
-        return "" + m_id + "   " + host + "   " + maxEntries + "   " + minRating + "   " + location.getAddress()+  "   " + location.getCity() + "   " + date;
+        return "" + id + "   " + host + "   " + maxEntries + "   " + minRating + "   " + location.getAddress()+  "   " + location.getCity() + "   " + date;
+    }
+    public String[] getInfo(){
+        return new String[]{this.hostName, Integer.toString(this.maxEntries), Double.toString(this.minRating), this.lAdress, this.lCity, DateUtil.fromUtilDateToString(this.date)};
     }
 }

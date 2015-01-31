@@ -19,21 +19,13 @@ import model.Player;
  * @author CVD
  */
 public class PlayerController {
-    private static String is_famous;
-    private static boolean famous;
+
     private static ArrayList<Player> players = new ArrayList();
     
-    public static String addPlayer(String firstName, String lastName, String address, String zipcode, String city, String emailAddress, String telephoneNumber,double rating, boolean famous){
+    public static String addPlayer(String firstName, String lastName, String address, String zipcode, String city, String emailAddress, String telephoneNumber, double rating, String famous){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();            
-            
-            if(famous){
-               is_famous = "T";
-            }
-            else{
-               is_famous = "F";
-            }
             
             //player
             String prepStatInsertPlayer = "INSERT INTO player (first_name, last_name,address, zipcode, city, emailaddress, telephonenumber, rating, famous) "
@@ -48,7 +40,7 @@ public class PlayerController {
             prepStat.setString(6, emailAddress);
             prepStat.setString(7, telephoneNumber);
             prepStat.setDouble(8, rating);
-            prepStat.setString(9, is_famous);
+            prepStat.setString(9, famous);
             
             
             System.out.println(prepStat);
@@ -67,13 +59,6 @@ public class PlayerController {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
-            if(player.isfamous()){
-               is_famous = "T";
-            }
-            else{
-               is_famous = "F";
-            }
-            
             String prepStatUpdatePlayer = "UPDATE player SET first_name=?, last_name=?,address=?, zipcode=?, city=?, emailaddress=?, telephonenumber=?, rating=?, famous=? WHERE s_id = ?";
             
             PreparedStatement prepStat =  conn.prepareStatement(prepStatUpdatePlayer);
@@ -86,7 +71,7 @@ public class PlayerController {
             prepStat.setString(6, player.getEmailAddress());
             prepStat.setString(7, player.getTelephoneNumber());
             prepStat.setDouble(8, player.getRating());
-            prepStat.setBoolean(9, famous);
+            prepStat.setString(9, player.isFamous());
             prepStat.setInt(10, player.getId());
             
             System.out.println(prepStat);
@@ -120,26 +105,6 @@ public class PlayerController {
         }
     }
     
-    public static String getPlayerById(int id){
-        try {
-            Connection conn = DataBaseConnector.getConnection(); 
-            Statement stat = conn.createStatement();
-            
-            String prepStatGetPlayerById = "SELECT * FROM player WHERE s_id = ?";
-            PreparedStatement prepStat =  conn.prepareStatement(prepStatGetPlayerById);
-            
-            prepStat.setInt(1, id);
-            
-            prepStat.executeUpdate();
-            stat.close();
-            return "Succesvol de speler opgehaald!";
-        }
-        catch (SQLException exc) {
-            System.err.println("Sql fout bij het ophalen van de speler: " + exc.toString());
-            return "Sql fout bij het ophalen van de speler.";
-        }
-    }
-    
     public static String getAllPlayers(){
         try {
             Connection conn = DataBaseConnector.getConnection();
@@ -156,13 +121,12 @@ public class PlayerController {
                 String emailAddress = result.getString("emailaddress");
                 String telephoneNumber = result.getString("telephonenumber");
                 double rating = result.getInt("rating");
-                is_famous = result.getString("famous");
+                String famous = result.getString("famous");
                 
                 if(telephoneNumber.length() == 9){
                     telephoneNumber = "o" + telephoneNumber; 
                 }
                 
-                famous = is_famous.equals("T");
                 Player player = new Player(id, firstName, lastName, address, zipcode, city, emailAddress, telephoneNumber, rating, famous);
                 players.add(player);
             }

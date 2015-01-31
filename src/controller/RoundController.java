@@ -16,7 +16,7 @@ import model.Tournament;
  * @author Jeroen
  */
 public class RoundController {
-    private static ArrayList<Round> rounds;
+    private static ArrayList<Round> rounds = new ArrayList();
     
     public static void addRound(int roundNumber, ArrayList<Player> players, ArrayList<Tournament> tournaments) {
         try {
@@ -31,7 +31,7 @@ public class RoundController {
             PreparedStatement prepStat =  conn.prepareStatement(prepStatInsertRound);
             
             prepStat.setInt(1, roundNumber);
-            prepStat.setInt(2, tournament.getTournamentId());
+            prepStat.setInt(2, tournament.getId());
 
             
             System.out.println(prepStat);
@@ -112,7 +112,7 @@ public class RoundController {
         }
     }
 
-    public static ArrayList<Table> getTables() {
-        return tables;
+    public static ArrayList<Round> getRounds() {
+        return rounds;
     } 
 }

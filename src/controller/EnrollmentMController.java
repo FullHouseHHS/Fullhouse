@@ -13,32 +13,32 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
-import model.Enrollment;
+import model.EnrollmentM;
+import model.Masterclass;
 import model.Player;
-import model.Tournament;
 import utilities.databaseUtil.DateUtil;
 
 /**
  *
  * @author CVD
  */
-public class EnrollmentController {
-    private static ArrayList<Enrollment> enrollments = new ArrayList();
-    private static Player enrollPlayer;
-    private static Tournament enrollTournament;
+public class EnrollmentMController {
+    private static ArrayList<EnrollmentM> mEnrollments = new ArrayList();
+    private static Player enrollMPlayer;
+    private static Masterclass enrollMMasterclass;
 
     
-    public static String addEnrollment(Player player, Tournament tournament, Date date, String paid){
+    public static String addEnrollmentM(Player player, Masterclass masterclass, Date date, String paid){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
-            String prepStatInsertEnrollment = "INSERT INTO enrollment (s_id, to_id, date, paid) "
+            String prepStatInsertEnrollmentM = "INSERT INTO enrollment_m (s_id, m_id, date, paid) "
                                                    + "VALUES (?, ?, ?, ?)";
-            PreparedStatement prepStat =  conn.prepareStatement(prepStatInsertEnrollment);
+            PreparedStatement prepStat =  conn.prepareStatement(prepStatInsertEnrollmentM);
             
             prepStat.setInt(1, player.getId());
-            prepStat.setInt(2, tournament.getId());
+            prepStat.setInt(2, masterclass.getId());
             prepStat.setTimestamp(3, DateUtil.toSqlTimestamp(date));
             prepStat.setString(4, paid);
          
@@ -54,19 +54,19 @@ public class EnrollmentController {
         }
     }
     
-    public static String updateEnrollment(Enrollment enrollment){
+    public static String updateEnrollmentM(EnrollmentM enrollmentM){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
-            String prepStatChangeEnrollment = "UPDATE enrollment SET date=?, paid=? WHERE s_id = ? AND to_id = ?";
+            String prepStatChangeEnrollmentM = "UPDATE enrollment_m SET date=?, paid=? WHERE s_id = ? AND m_id = ?";
             
-            PreparedStatement prepStat =  conn.prepareStatement(prepStatChangeEnrollment);
+            PreparedStatement prepStat =  conn.prepareStatement(prepStatChangeEnrollmentM);
             
-            prepStat.setTimestamp(1, DateUtil.toSqlTimestamp(enrollment.getDate()));
-            prepStat.setString(2, enrollment.getPaid());
-            prepStat.setInt(3, enrollment.getPlayer().getId());
-            prepStat.setInt(4, enrollment.getTournament().getId());
+            prepStat.setTimestamp(1, DateUtil.toSqlTimestamp(enrollmentM.getDate()));
+            prepStat.setString(2, enrollmentM.getPaid());
+            prepStat.setInt(3, enrollmentM.getPlayer().getId());
+            prepStat.setInt(4, enrollmentM.getMasterclass().getId());
             
             System.out.println(prepStat);
             prepStat.executeUpdate();
@@ -79,16 +79,16 @@ public class EnrollmentController {
         }
     }
     
-    public static String deleteEnrollment(Enrollment enrollment){
+    public static String deleteEnrollmentM(EnrollmentM enrollmentM){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
-            String prepStatDeleteEnrollment = "DELETE FROM enrollment WHERE s_id = ? AND to_id = ?";
-            PreparedStatement prepStat =  conn.prepareStatement(prepStatDeleteEnrollment);
+            String prepStatDeleteEnrollmentM = "DELETE FROM enrollment_m WHERE s_id = ? AND m_id = ?";
+            PreparedStatement prepStat =  conn.prepareStatement(prepStatDeleteEnrollmentM);
             
-            prepStat.setInt(1, enrollment.getPlayer().getId());
-            prepStat.setInt(2, enrollment.getTournament().getId());
+            prepStat.setInt(1, enrollmentM.getPlayer().getId());
+            prepStat.setInt(2, enrollmentM.getMasterclass().getId());
             
             prepStat.executeUpdate();
             stat.close();
@@ -100,33 +100,33 @@ public class EnrollmentController {
         }
     }
     
-    public static String getAllEnrollments(){
+    public static String getAllMEnrollments(){
         try {
             Connection conn = DataBaseConnector.getConnection();
             Statement stat = conn.createStatement();
-            String getAllEnrollments = "SELECT * FROM enrollment";
-            ResultSet result = stat.executeQuery(getAllEnrollments);
+            String getAllMEnrollments = "SELECT * FROM enrollment_m";
+            ResultSet result = stat.executeQuery(getAllMEnrollments);
                         
             while (result.next()) {
                 int s_id = result.getInt("s_id");
-                int to_id = result.getInt("to_id");
+                int m_id = result.getInt("m_id");
                 Date date = result.getTimestamp("date");
                 String paid = result.getString("paid");
                     
                 for(Player player : PlayerController.getPlayers()){
                     if(player.getId() == s_id){
-                        player = enrollPlayer;
+                        player = enrollMPlayer;
                     }
                 }
                 
-                for(Tournament tournament : TournamentController.getTournaments()){
-                    if(tournament.getId() == to_id){
-                        tournament = enrollTournament;
+                for(Masterclass masterclass : MasterclassController.getMasterclasses()){
+                    if(masterclass.getId() == m_id){
+                        masterclass = enrollMMasterclass;
                     }
                 }
                 
-                Enrollment enrollment = new Enrollment(enrollPlayer, enrollTournament, date, paid);
-                enrollments.add(enrollment);
+                EnrollmentM enrollmentM = new EnrollmentM(enrollMPlayer, enrollMMasterclass, date, paid);
+                mEnrollments.add(enrollmentM);
             }
 
             result.close();
@@ -138,7 +138,7 @@ public class EnrollmentController {
         }
     }
     
-    public static ArrayList<Enrollment> getEnrollments() {
-        return enrollments;
+    public static ArrayList<EnrollmentM> getMEnrollments() {
+        return mEnrollments;
     }
 }

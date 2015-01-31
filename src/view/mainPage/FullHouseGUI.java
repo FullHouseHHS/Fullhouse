@@ -5,7 +5,11 @@
  */
 package view.mainPage;
 
+import controller.LocationController;
+import controller.MasterclassController;
 import controller.PlayerController;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import view.add.AddObjects;
 import view.add.AddPlayer;
 import view.overview.Overview;
@@ -23,6 +27,7 @@ public class FullHouseGUI extends javax.swing.JFrame {
     public FullHouseGUI() {
         initComponents();
         initData();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -100,14 +105,28 @@ public class FullHouseGUI extends javax.swing.JFrame {
     private void initTabs() {
         this.jTabbedPane.add("Home", new HomeScreen());
         this.jTabbedPane.add("Overzichten", new Overview());
+        this.jTabbedPane.add("Speler toevoegen", new AddPlayer());         
         this.jTabbedPane.add("Toevoegen", new AddObjects());
         this.jTabbedPane.add("Speler toevoegen", new AddPlayer());
     }
 
     private void initData() {
-        String sqlStatus = PlayerController.getAllPlayers();
-        if(sqlStatus.contains("Succes")){
-            initTabs();           
+        boolean allTrue = true;
+        ArrayList<String> sqlStatusses = new ArrayList();
+        
+        sqlStatusses.add(PlayerController.getAllPlayers());
+        sqlStatusses.add(LocationController.getAllLocations());
+        sqlStatusses.add(MasterclassController.getAllMasterclasses());
+        
+        for(String sqlStatus : sqlStatusses){
+            if(sqlStatus.contains("fout")){
+                JOptionPane.showMessageDialog(this, sqlStatus, "Error", JOptionPane.ERROR_MESSAGE);
+                allTrue = false;
+            }
+        }
+        
+        if(allTrue){
+            initTabs();
         }
     }
 }

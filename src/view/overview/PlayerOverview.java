@@ -46,7 +46,7 @@ public class PlayerOverview extends javax.swing.JPanel {
         jPlayerTable = new javax.swing.JTable();
         jSearchPlayer = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        deletePlayerButton = new javax.swing.JButton();
 
         jPlayerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,10 +81,10 @@ public class PlayerOverview extends javax.swing.JPanel {
 
         jLabel1.setText("Zoek een speler:");
 
-        jButton1.setText("Delete player(s)");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        deletePlayerButton.setText("Verwijder speler(s)");
+        deletePlayerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                deletePlayerButtonActionPerformed(evt);
             }
         });
 
@@ -97,7 +97,7 @@ public class PlayerOverview extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(deletePlayerButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -115,7 +115,7 @@ public class PlayerOverview extends javax.swing.JPanel {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(deletePlayerButton)
                         .addGap(10, 10, 10)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                 .addContainerGap())
@@ -147,14 +147,14 @@ public class PlayerOverview extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jSearchPlayerKeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void deletePlayerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePlayerButtonActionPerformed
         DefaultTableModel model = (DefaultTableModel) this.jPlayerTable.getModel();
         int[] rows = jPlayerTable.getSelectedRows();
         for(int i=0;i<rows.length;i++){
             PlayerController.deletePlayer(players.get(rows[i]-i));
         }
         fillTable();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_deletePlayerButtonActionPerformed
 
     private void jPlayerTablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jPlayerTablePropertyChange
         try{
@@ -193,7 +193,7 @@ public class PlayerOverview extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "Rating kan niet aangepast worden!", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
                 case "bekend":
-                    player.setFamous(Boolean.parseBoolean(value));
+                    player.setFamous(value);
                 break;
             }
             PlayerController.updatePlayer(player);
@@ -204,7 +204,7 @@ public class PlayerOverview extends javax.swing.JPanel {
     }//GEN-LAST:event_jPlayerTablePropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton deletePlayerButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTable jPlayerTable;
     private javax.swing.JScrollPane jScrollPane1;

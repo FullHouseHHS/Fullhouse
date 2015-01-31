@@ -15,20 +15,21 @@ import model.Location;
  * @author Jeroen
  */
 public class LocationController {
-    private static ArrayList<Location> locations;
+    private static ArrayList<Location> locations = new ArrayList();
     
-    public static String addLocations(String address, String city, int maxTables) {
+    public static String addLocations(String address, String zipcode, String city, int maxTables) {
         try{
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             //location
-            String prepStatInsertLocation = "INSERT INTO location (address, city, maxTables)"
+            String prepStatInsertLocation = "INSERT INTO location (address, zipcode, city, max_tables)"
                                                    + "VALUES (?, ?, ?)";
             PreparedStatement prepStat =  conn.prepareStatement(prepStatInsertLocation);
             
             prepStat.setString(1, address);
-            prepStat.setString(2, city);
-            prepStat.setInt(3, maxTables);
+            prepStat.setString(2, zipcode);
+            prepStat.setString(3, city);
+            prepStat.setInt(4, maxTables);
             
             System.out.println(prepStat);
             prepStat.executeUpdate();
@@ -42,18 +43,19 @@ public class LocationController {
         
     }
    
-    public static String updateLocation(String address, String city, int maxTables){
+    public static String updateLocation(Location location){
         try {
             Connection conn = DataBaseConnector.getConnection(); 
             Statement stat = conn.createStatement();
             
-            String prepStatChangeLocation = "UPDATE location SET address = ?, city = ?, maxTables = ? WHERE address = ?";
+            String prepStatChangeLocation = "UPDATE location SET address = ?, zipcode = ?, city = ?, max_tables = ? WHERE address = ? and city = ?";
             
             PreparedStatement prepStat =  conn.prepareStatement(prepStatChangeLocation);
             
-            prepStat.setString(1, address);
-            prepStat.setString(2, city);
-            prepStat.setInt(3, maxTables);
+            prepStat.setString(1, location.getAddress());
+            prepStat.setString(2, location.getZipcode());
+            prepStat.setString(3, location.getCity());
+            prepStat.setInt(4, location.getMaxTables());
 
             
             System.out.println(prepStat);
@@ -95,11 +97,12 @@ public class LocationController {
             ResultSet result = stat.executeQuery("SELECT * FROM location");
             
             while (result.next()) {
+                String zipcode = result.getString("zipcode");
                 String address = result.getString("address");
-                String city = result.getString("location");
-                int maxTables = result.getInt("maxTables");
+                String city = result.getString("city");
+                int maxTables = result.getInt("max_tables");
                 
-                Location location = new Location(address, city, maxTables);
+                Location location = new Location(address, zipcode, city, maxTables);
                 locations.add(location);
             }
 

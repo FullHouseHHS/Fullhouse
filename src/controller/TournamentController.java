@@ -16,7 +16,7 @@ import utilities.databaseUtil.DateUtil;
  * @author Jeroen
  */
 public class TournamentController {
-    private static ArrayList<Tournament> tournaments;
+    private static ArrayList<Tournament> tournaments = new ArrayList();
     
     public static String addTournament(String type, double entryFee, Location location, java.util.Date date) {
         try {
@@ -31,7 +31,7 @@ public class TournamentController {
             prepStat.setDouble(1, entryFee);
             prepStat.setString(3, location.getAddress());
             prepStat.setString(4, location.getCity());
-            prepStat.setDate(5, DateUtil.toSqlDate(date));
+            prepStat.setTimestamp(5, DateUtil.toSqlTimestamp(date));
             
             
             System.out.println(prepStat);
