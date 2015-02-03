@@ -101,6 +101,7 @@ public class EnrollmentController {
     }
     
     public static String getAllEnrollments(){
+        enrollments.clear();
         try {
             Connection conn = DataBaseConnector.getConnection();
             Statement stat = conn.createStatement();

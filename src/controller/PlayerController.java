@@ -106,6 +106,7 @@ public class PlayerController {
     }
     
     public static String getAllPlayers(){
+        players.clear();
         try {
             Connection conn = DataBaseConnector.getConnection();
             Statement stat = conn.createStatement();

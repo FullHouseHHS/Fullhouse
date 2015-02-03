@@ -91,6 +91,7 @@ public class LocationController {
     }
         
     public static String getAllLocations(){
+        locations.clear();
         try {
             Connection conn = DataBaseConnector.getConnection();
             Statement stat = conn.createStatement();

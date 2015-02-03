@@ -104,6 +104,7 @@ public class TableController {
     
     
     public static void getAllTables() {
+        tables.clear();
         try {
             Connection conn = DataBaseConnector.getConnection();
             Statement stat = conn.createStatement();

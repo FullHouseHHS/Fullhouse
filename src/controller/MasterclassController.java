@@ -105,6 +105,7 @@ public class MasterclassController {
     }
     
     public static String getAllMasterclasses(){
+        masterclasses.clear();
         try {
             Connection conn = DataBaseConnector.getConnection();
             Statement stat = conn.createStatement();

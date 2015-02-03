@@ -88,6 +88,7 @@ public class RoundController {
     
     
     public static void getAllRounds() {
+        rounds.clear();
         try {
             Connection conn = DataBaseConnector.getConnection();
             Statement stat = conn.createStatement();
